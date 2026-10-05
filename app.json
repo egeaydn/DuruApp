@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Duru",
+    "slug": "duru",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#F6F3EC",
+    "ios": { "bundleIdentifier": "app.duru.prototype", "supportsTablet": true },
+    "android": { "package": "app.duru.prototype" },
+    "web": { "bundler": "metro", "name": "Duru · Kendine bir hikâye ayır", "lang": "tr" },
+    "plugins": [["expo-audio", { "enableBackgroundPlayback": true, "enableBackgroundRecording": false, "recordAudioAndroid": false, "microphonePermission": false }]]
+  }
+}

@@ -1,0 +1,12 @@
+node_modules/
+.expo/
+dist/
+web-test-results/
+native-test-results/
+.env*
+!.env.example
+credentials/
+generated-audio/
+android/
+ios/
+*.log

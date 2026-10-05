@@ -1,0 +1,80 @@
+{
+  "bookId": "kiyidaki-isik",
+  "textVersion": "1.0.0",
+  "narrators": [
+    {
+      "id": "eleven-1",
+      "label": "Anlatıcı 1",
+      "description": "ElevenLabs · Deneme kaydı · Hak incelemesi bekliyor",
+      "kind": "ai",
+      "stage": "preview",
+      "badge": "AI deneme"
+    }
+  ],
+  "profiles": {
+    "eleven-1": {
+      "duration": 210.18699999999998,
+      "sha256": "cc7e12a52e657e913d7f338e0a5af548480ff4bd78e7a5eea94eb0ebf787517c",
+      "voiceId": "GLHtjkeLJ9Rxcv9JhLmh",
+      "modelId": "eleven_multilingual_v2",
+      "paragraphs": [
+        {
+          "id": "p01",
+          "start": 0,
+          "duration": 26.006333333333334,
+          "file": "eleven-1/p01.wav",
+          "sha256": "02fd0058509cce3089791c08a3ccfb0888591650644b5ff1ad807accccd2a0c7"
+        },
+        {
+          "id": "p02",
+          "start": 26.006333333333334,
+          "duration": 25.913458333333335,
+          "file": "eleven-1/p02.wav",
+          "sha256": "1de6575981778bee93746b62f089834f67e44798b359bb15a818cd553ed71c12"
+        },
+        {
+          "id": "p03",
+          "start": 51.91979166666667,
+          "duration": 28.560541666666666,
+          "file": "eleven-1/p03.wav",
+          "sha256": "20b2eed88fa8cf67a708663758933a48b7e88e858b9d3e48182ae8f013e07fdb"
+        },
+        {
+          "id": "p04",
+          "start": 80.48033333333333,
+          "duration": 26.47075,
+          "file": "eleven-1/p04.wav",
+          "sha256": "8e03f750c70629b990a2a1e6faecf5943c8ff179086e1a685eec8d58c33e4ae4"
+        },
+        {
+          "id": "p05",
+          "start": 106.95108333333333,
+          "duration": 25.031125,
+          "file": "eleven-1/p05.wav",
+          "sha256": "fea05291712f9900c3308328041f94b699c45a4e1be8b2da1769c8bfe67b3a71"
+        },
+        {
+          "id": "p06",
+          "start": 131.98220833333332,
+          "duration": 25.541958333333334,
+          "file": "eleven-1/p06.wav",
+          "sha256": "6f73f934ebbc74bccc664c29f6432a07b224894543be16c77ff8ec3c706e5f63"
+        },
+        {
+          "id": "p07",
+          "start": 157.52416666666664,
+          "duration": 27.399541666666668,
+          "file": "eleven-1/p07.wav",
+          "sha256": "fc334366fb0472c2a600ddb00a435b19b3663e61e728e64cb04da4b532189a5a"
+        },
+        {
+          "id": "p08",
+          "start": 184.9237083333333,
+          "duration": 25.263291666666667,
+          "file": "eleven-1/p08.wav",
+          "sha256": "2c8c4e9f21b7419b5ee51946536046c4ad9bce02e570a0dcf2308667f4ed9455"
+        }
+      ]
+    }
+  }
+}

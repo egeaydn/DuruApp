@@ -1,0 +1,133 @@
+{
+  "bookId": "kiyidaki-isik",
+  "textVersion": "1.0.0",
+  "demo": true,
+  "provider": "Windows SAPI",
+  "voice": "Microsoft Tolga (tr-TR)",
+  "profiles": {
+    "demo-standard": {
+      "duration": 195.75251700680275,
+      "sha256": "94cfaf4530e4a90082523b65470122e95a2dea183cf7f76ef19a2ee0dd7e9512",
+      "paragraphs": [
+        {
+          "id": "p01",
+          "start": 0,
+          "duration": 24.149433106575962,
+          "file": "demo-standard/p01.wav",
+          "sha256": "a46996e898c46a1fcfee602ba5b10b90fda2fe1e5acabd0836697fc16c6b4076"
+        },
+        {
+          "id": "p02",
+          "start": 24.149433106575962,
+          "duration": 25.124625850340134,
+          "file": "demo-standard/p02.wav",
+          "sha256": "d08b7cb8d96f5d7a7ce06e707dc431deb85770990b7c5e218c9a30bc2d20cc83"
+        },
+        {
+          "id": "p03",
+          "start": 49.27405895691609,
+          "duration": 24.919727891156462,
+          "file": "demo-standard/p03.wav",
+          "sha256": "cd680b60de143b0656f79c8f2e7b0b3118bc4ebe46e45f9290f40079ff3a1f21"
+        },
+        {
+          "id": "p04",
+          "start": 74.19378684807256,
+          "duration": 24.504580498866215,
+          "file": "demo-standard/p04.wav",
+          "sha256": "eaec7efc5835bdbbb20156c27939f4fde5a18513fb88122b5f92431180f03457"
+        },
+        {
+          "id": "p05",
+          "start": 98.69836734693878,
+          "duration": 23.96467120181406,
+          "file": "demo-standard/p05.wav",
+          "sha256": "d06248d640e3d11a5e4e4ee16eb1c98a4d43755f899a25263b3b154c2bf84ba1"
+        },
+        {
+          "id": "p06",
+          "start": 122.66303854875284,
+          "duration": 24.12984126984127,
+          "file": "demo-standard/p06.wav",
+          "sha256": "1c9c4bdd319bd401c4d022eb1663f57f88f2288afdd62b2a215a5262107814c9"
+        },
+        {
+          "id": "p07",
+          "start": 146.79287981859412,
+          "duration": 25.294557823129253,
+          "file": "demo-standard/p07.wav",
+          "sha256": "ff703cc3054a8cc382ce5671ab2739565e12e533980fa86eaee079afe673e59b"
+        },
+        {
+          "id": "p08",
+          "start": 172.08743764172337,
+          "duration": 23.665079365079364,
+          "file": "demo-standard/p08.wav",
+          "sha256": "1cd4fda46cdd7bf1c2c5c9e7d33f998cd2797a411aa18a7d9d852ebd25a659aa"
+        }
+      ]
+    },
+    "demo-slow": {
+      "duration": 244.09646258503403,
+      "sha256": "95733fc30752c07e56ee219fd80cecf92dfec4d931b5a26af9c193d0ba06fc8f",
+      "paragraphs": [
+        {
+          "id": "p01",
+          "start": 0,
+          "duration": 30.127074829931974,
+          "file": "demo-slow/p01.wav",
+          "sha256": "9c20d90b2dae7225a18df1bddcdcca23ba2aa68e9f35567afcf8b852c09975fd"
+        },
+        {
+          "id": "p02",
+          "start": 30.127074829931974,
+          "duration": 31.328344671201815,
+          "file": "demo-slow/p02.wav",
+          "sha256": "6a16c397d2cd96f3e2cecc80c9e786397b45a0a4dc410fe2fd9db5bd03c5cb97"
+        },
+        {
+          "id": "p03",
+          "start": 61.45541950113379,
+          "duration": 31.06526077097506,
+          "file": "demo-slow/p03.wav",
+          "sha256": "8888997a057ab2bc9662f023199bb149062559d46b5338a73c0daf3e33eb297f"
+        },
+        {
+          "id": "p04",
+          "start": 92.52068027210885,
+          "duration": 30.53655328798186,
+          "file": "demo-slow/p04.wav",
+          "sha256": "3b7b16eb41c19d62bd0a7aad6720d424743fcc12533a7402208a5e43cee126b6"
+        },
+        {
+          "id": "p05",
+          "start": 123.05723356009071,
+          "duration": 29.87061224489796,
+          "file": "demo-slow/p05.wav",
+          "sha256": "e56bb0c35182e8124238ea1de3f2c366c7c799ef994cab4a19a4b0474416269b"
+        },
+        {
+          "id": "p06",
+          "start": 152.92784580498866,
+          "duration": 30.09560090702948,
+          "file": "demo-slow/p06.wav",
+          "sha256": "5357e731f24bdb11a3326bb751eecb50fe3c59f15deb4f37ef3ac51aa5b7d0eb"
+        },
+        {
+          "id": "p07",
+          "start": 183.02344671201814,
+          "duration": 31.55233560090703,
+          "file": "demo-slow/p07.wav",
+          "sha256": "20581e58453d6a9a1985f678aeb4ef94eee6906205eff1a138817171d6726ea5"
+        },
+        {
+          "id": "p08",
+          "start": 214.57578231292518,
+          "duration": 29.520680272108844,
+          "file": "demo-slow/p08.wav",
+          "sha256": "56cb13c99489f4bfbc824e944d62121321d9890a459cf4026024bf01d92afcfa"
+        }
+      ]
+    }
+  }
+}

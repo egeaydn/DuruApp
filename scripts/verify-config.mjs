@@ -1,0 +1,10 @@
+import { execFileSync } from 'node:child_process';
+import assert from 'node:assert/strict';
+const config = JSON.parse(execFileSync(process.execPath, ['node_modules/expo/bin/cli', 'config', '--type', 'introspect', '--json'], { encoding: 'utf8', maxBuffer: 1024 * 1024 }));
+assert.ok(config.ios.infoPlist.UIBackgroundModes.includes('audio'));
+assert.equal(config.ios.infoPlist.NSMicrophoneUsageDescription, undefined);
+assert.ok(config.android.permissions.includes('android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK'));
+assert.ok(!config.android.permissions.includes('android.permission.RECORD_AUDIO'));
+const services = config._internal.modResults.android.manifest.manifest.application[0].service;
+assert.ok(services.some(s => s.$['android:name'] === 'expo.modules.audio.service.AudioControlsService' && s.$['android:foregroundServiceType'] === 'mediaPlayback'));
+console.log('Native yapılandırma geçti: iOS background audio, Android media playback foreground service; mikrofon izni yok. Bu kontrol gerçek cihaz testi değildir.');

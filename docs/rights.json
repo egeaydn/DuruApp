@@ -1,0 +1,15 @@
+{
+  "reviewDate": "2026-10-05",
+  "commercialReleaseApproved": false,
+  "assets": [
+    { "type": "book", "id": "kiyidaki-isik", "version": "1.0.0", "source": "content/story.json", "provenance": "Bu prototip için sıfırdan yazılan özgün hikâye; dış kitap veya çeviri kullanılmadı.", "rightsStatus": "Original prototype content; publication legal review pending", "translation": null },
+    { "type": "cover", "id": "kiyidaki-isik-cover", "source": "src/Cover.tsx", "provenance": "Bu prototip için kodla çizilen özgün SVG; dış kapak görseli kullanılmadı.", "rightsStatus": "Original prototype artwork; publication legal review pending" },
+    { "type": "voice", "id": "demo-tolga", "source": "Windows SAPI / Microsoft Tolga tr-TR", "profiles": ["demo-standard", "demo-slow"], "provenance": "Kurulu Türkçe sistem sesi; aynı sesin iki farklı okuma hızı. Önceden kaydedilmiş demo WAV dosyaları.", "rightsStatus": "Commercial audio redistribution rights NOT verified", "aiNarrator": false, "contract": null, "aiNarrationScope": "not verified", "digitalDistributionScope": "not verified", "offlineScope": "not verified", "territories": null, "expiresAt": null },
+    { "type": "voice", "id": "eleven-1", "source": "ElevenLabs Voice Library", "voiceId": "GLHtjkeLJ9Rxcv9JhLmh", "providerName": "Muhammer Arabacı - Enthusiastic, Direct", "modelId": "eleven_multilingual_v2", "audio": "assets/audio/eleven-1.wav", "reviewRecord": "assets/audio/eleven-1/rights-and-review.json", "stage": "preview", "provenance": "Özgün hikâyenin 8 paragrafı sağlayıcının kütüphane sesiyle önceden üretildi; uygulamada AI deneme olarak gösterilir.", "rightsStatus": "Trial only; commercial distribution and listening review NOT verified", "aiNarrator": true, "contract": null, "aiNarrationScope": "not verified", "digitalDistributionScope": "not verified", "offlineScope": "not verified", "territories": null, "expiresAt": null }
+  ],
+  "thirdPartyAssets": [
+    { "id": "Lora and Manrope fonts", "source": "@expo-google-fonts packages", "license": "SIL Open Font License 1.1; packaged license files in node_modules", "note": "Retain required license notices when distributing." },
+    { "id": "Lucide icons", "source": "lucide-react-native", "license": "ISC; packaged license in node_modules" }
+  ],
+  "releaseGates": ["Verify narrator identity and commercial contract", "Record AI narration, distribution, territory, duration and offline rights", "Legal review before publication", "Replace demo voice recordings before commercial release"]
+}

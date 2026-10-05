@@ -1,0 +1,51 @@
+{
+  "voiceId": "GLHtjkeLJ9Rxcv9JhLmh",
+  "modelId": "eleven_multilingual_v2",
+  "textVersion": "1.0.0",
+  "identityVerified": false,
+  "commercialUseVerified": false,
+  "rightsEvidence": "",
+  "reviewedAt": "",
+  "paragraphs": {
+    "p01": {
+      "audioHash": "02fd0058509cce3089791c08a3ccfb0888591650644b5ff1ad807accccd2a0c7",
+      "accepted": false,
+      "notes": ""
+    },
+    "p02": {
+      "audioHash": "1de6575981778bee93746b62f089834f67e44798b359bb15a818cd553ed71c12",
+      "accepted": false,
+      "notes": ""
+    },
+    "p03": {
+      "audioHash": "20b2eed88fa8cf67a708663758933a48b7e88e858b9d3e48182ae8f013e07fdb",
+      "accepted": false,
+      "notes": ""
+    },
+    "p04": {
+      "audioHash": "8e03f750c70629b990a2a1e6faecf5943c8ff179086e1a685eec8d58c33e4ae4",
+      "accepted": false,
+      "notes": ""
+    },
+    "p05": {
+      "audioHash": "fea05291712f9900c3308328041f94b699c45a4e1be8b2da1769c8bfe67b3a71",
+      "accepted": false,
+      "notes": ""
+    },
+    "p06": {
+      "audioHash": "6f73f934ebbc74bccc664c29f6432a07b224894543be16c77ff8ec3c706e5f63",
+      "accepted": false,
+      "notes": ""
+    },
+    "p07": {
+      "audioHash": "fc334366fb0472c2a600ddb00a435b19b3663e61e728e64cb04da4b532189a5a",
+      "accepted": false,
+      "notes": ""
+    },
+    "p08": {
+      "audioHash": "2c8c4e9f21b7419b5ee51946536046c4ad9bce02e570a0dcf2308667f4ed9455",
+      "accepted": false,
+      "notes": ""
+    }
+  }
+}
