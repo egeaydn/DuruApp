@@ -1,6 +1,6 @@
 ﻿# Duru
 
-Türkçe, sakin bir sesli kitap deneyimi için React Native + Expo SDK 57 + TypeScript prototipi. Anahtarsız demo çalışır. ElevenLabs için yerel `.env` kullanan paragraf bazında üretim ve anlatıcı kurulum akışı eklendi; altı Voice ID tanımlı. İlk sesin tam hikâye kaydı **AI deneme** olarak Pixel 9 emülatöründe oynatıldı: [docs/ELEVENLABS-TRIAL.md](docs/ELEVENLABS-TRIAL.md). Kurulum: [docs/ELEVENLABS.md](docs/ELEVENLABS.md). Üyelik, ödeme ve mağaza yayını yoktur.
+Türkçe, sakin bir sesli kitap deneyimi için React Native + Expo SDK 57 + TypeScript prototipi. Anahtarsız demo çalışır. ElevenLabs için yerel `.env` kullanan paragraf bazında üretim ve anlatıcı kurulum akışı eklendi. Altı Voice ID'nin tam hikâye kayıtları **AI deneme** olarak hazır; oynatıcıdaki **Ses değiştir** ile ortak paragraf üzerinden geçiş yapılır. Pixel 9 emülatöründe doğrulandı: [docs/VOICE-SWITCH.md](docs/VOICE-SWITCH.md). Kurulum: [docs/ELEVENLABS.md](docs/ELEVENLABS.md). Üyelik, ödeme ve mağaza yayını yoktur.
 
 ## Çalıştırma
 
@@ -11,7 +11,17 @@ npm.cmd ci
 npm.cmd run web
 ```
 
-Windows PowerShell'de `npm.ps1` yürütme ilkesi engeline takılmamak için `npm.cmd` kullanılır. macOS/Linux'ta aynı komutlar `npm` ile çalışır. Expo geliştirme sunucusu bağlantısını terminalde gösterir. Expo Go'da ön plan oynatma denenebilir; arka plan ve kilit ekranı için kendi native derlemeni kullan.
+Windows PowerShell'de `npm.ps1` yürütme ilkesi engeline takılmamak için `npm.cmd` kullanılır. macOS/Linux'ta aynı komutlar `npm` ile çalışır.
+
+Android geliştirme istemcisi kuruluysa günlük kullanım:
+
+```powershell
+npm.cmd run android
+```
+
+Bu komut Expo terminalini açık tutar, geliştirme derlemesine ait QR kodunu gösterir ve emülatörde uygulamayı açar. `a` Android'i açar, `r` yeniler, `c` QR kodunu gösterir, `Ctrl+C` sunucuyu kapatır. Yalnızca sunucu için `npm.cmd start`, sonra `a` kullan. `npm.cmd start -- --android` da aynı akışı açar. Tek Metro terminali açık tut; mevcut sunucuyu kapatırken “Stopped server” çıktısını bekle.
+
+İlk kurulum veya native bağımlılık/config değişikliği için `npm.cmd run android:build` kullan. Bu işlem Expo prebuild ile üretilen `android/` klasörünü günceller ve native APK'yı kurar. Günlük TypeScript değişikliklerinde yeniden native derleme gerekmez. Bağlantı localhost üzerinden emülatöre yönlendirilir; bu QR kodu fiziksel telefonda Expo Go bağlantısı değildir. Ayrıntılar: [docs/ANDROID-EMULATOR.md](docs/ANDROID-EMULATOR.md).
 
 Hazır web paketini yerel olarak açmak için:
 
@@ -33,6 +43,8 @@ Adres: http://127.0.0.1:8083. Sunucu WAV için HTTP Range isteklerini destekler.
 - Mobil ve geniş ekran düzeni, Türkçe kontrol etiketleri, profil/hız için seçili durum semantiği, büyüyebilen yazılar ve SVG kapak.
 
 ## Ses ve paragraf eşlemesi
+
+6 Ekim'de altı AI deneme kaydına yerel cızırtı temizleme uygulandı; ham üretimler saklandı, süre ve paragraf başlangıçları korundu. Yüklenirken değiştirilen hızın 1× etiketiyle eşleşmesi ve perde koruması da düzeltildi. Dinleme sonucu, temizleme/geri dönüş komutları ve kalan kalite sınırları: [docs/AUDIO-QUALITY.md](docs/AUDIO-QUALITY.md).
 
 `content/story.json` özgün metni ve kalıcı `p01`…`p08` kimliklerini içerir. `assets/audio/<profil>/<paragraf>.wav` ayrı paragraf kayıtlarıdır. `assets/audio/manifest.json`, metin sürümünü, sistem sesi kimliğini, dosya hashlerini ve her profilin **kendi** paragraf başlangıç/sürelerini tutar.
 
@@ -83,16 +95,16 @@ Son sonuçlar, ortam kısıtları ve test kapsamı: [docs/VERIFICATION.md](docs/
 Android için Android SDK/JDK ve bağlı telefon; iOS için macOS, Xcode, imzalama ve bağlı iPhone gerekir:
 
 ```sh
-npm run android
+npm run android:build
 # Bağlı fiziksel Android telefonunu seçmek için:
-npm run android -- --device
+npm run android:build -- --device
 # macOS:
 npx expo run:ios --device
 ```
 
-Android Studio'da **Tools → Device Manager** üzerinden Pixel 9 gibi bir sanal cihazı başlat. Proje kökünde Windows için `npm.cmd run android` çalıştır. İlk komut native Android derlemesini oluşturur/kurar ve Metro'yu açar. `App.tsx` ve `src/` dosyalarını kaydettikçe Fast Refresh ile emülatörde değişiklikleri takip edebilirsin. Android Studio'dan native projeyi incelemek için üretilen `android/` klasörünü aç; React Native arayüz kodunun kaynağı bu klasörün dışındaki TypeScript dosyalarıdır.
+Android Studio'da **Tools → Device Manager** üzerinden Pixel 9 gibi bir sanal cihazı başlat. İlk native kurulum için `npm.cmd run android:build`, günlük açık kalan Expo terminali için `npm.cmd run android` kullan. `App.tsx` ve `src/` dosyalarını kaydettikçe Fast Refresh ile emülatörde değişiklikleri takip edebilirsin. Android Studio'dan native projeyi incelemek için üretilen `android/` klasörünü aç; React Native arayüz kodunun kaynağı bu klasörün dışındaki TypeScript dosyalarıdır.
 
-`scripts/android.mjs`, mevcut SDK ve geçerli Java yolunu süreç için bulur; Windows'ta gerekirse Android Studio'nun JBR'ını kullanır. Genel ortam değişkenlerini değiştirmez. Native Metro varsayılanı 8081'dir; web önizlemesi 8083'de kalır. Farklı SDK kurulumu için `ANDROID_HOME` belirt. İlk native derleme Gradle/Android bağımlılıklarını indirdiğinden daha uzun sürer. Sonraki yalnızca TypeScript değişiklikleri için `npm.cmd run android:metro` kullanıp emülatörde kurulu Duru'yu açabilirsin. Native bağımlılık veya `app.json` eklentisi değişirse `npm.cmd run android` ile yeniden derle.
+`scripts/android.mjs`, mevcut SDK ve geçerli Java yolunu süreç için bulur; Windows'ta gerekirse Android Studio'nun JBR'ını kullanır. Genel ortam değişkenlerini değiştirmez. Native Metro varsayılanı 8081'dir; web önizlemesi 8083'de kalır. Farklı SDK kurulumu için `ANDROID_HOME` belirt. İlk native derleme Gradle/Android bağımlılıklarını indirdiğinden daha uzun sürer. Sonraki yalnızca TypeScript değişiklikleri için `npm.cmd run android:metro` kullanıp emülatörde kurulu Duru'yu açabilirsin. Native bağımlılık veya `app.json` eklentisi değişirse `npm.cmd run android:build` ile yeniden derle.
 
 `app.json` içindeki expo-audio eklentisi iOS `UIBackgroundModes: audio` ve Android medya oynatma foreground service yapılandırmasını üretir. Oynatıcı `shouldPlayInBackground`, `playsInSilentMode`, `doNotMix` kullanır; oynatma başladığında native kilit ekranı kontrollerini kitap/profil bilgileriyle etkinleştirir. Ayrıntılar için [Expo Audio belgeleri](https://docs.expo.dev/versions/v57.0.0/sdk/audio/).
 

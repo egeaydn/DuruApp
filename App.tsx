@@ -23,6 +23,7 @@ import { useFonts } from "expo-font";
 
 import {
   ArrowLeft,
+  ArrowLeftRight,
   Bookmark,
   BookOpen,
   Check,
@@ -305,43 +306,54 @@ function Transport({
     </View>
   );
 }
-function ProfileCards({ listen }: { listen: Listening }) {
+function ProfileCards({ listen, onSelect }: { listen: Listening; onSelect?: () => void }) {
+  const groups = [
+    { title: "AI anlatıcılar", items: profiles.filter(p => p.kind === "ai") },
+    { title: "Sistem sesi demoları", items: profiles.filter(p => p.kind === "demo") },
+  ].filter(group => group.items.length > 0);
   return (
-    <View style={[s.row, { flexWrap: "wrap", gap: 12 }]}>
-      {profiles.map((p, index) => (
-        <Pressable
-          accessibilityRole="radio"
-          accessibilityState={{ checked: listen.profile === p.id }}
-          aria-checked={listen.profile === p.id}
-          accessibilityLabel={`${p.label}, ${p.kind === 'demo' ? 'demo sistem sesi' : p.stage === 'preview' ? 'ElevenLabs AI deneme kaydı' : 'ElevenLabs AI anlatıcı'}`}
-          onPress={() => listen.changeProfile(p.id)}
-          key={p.id}
-          style={({ hovered }: { pressed: boolean; hovered?: boolean }) => [
-            s.profileCard,
-            listen.profile === p.id && s.profileActive,
-            hovered && { borderColor: C.green },
-          ]}
-        >
-          <View
-            style={[
-              s.avatar,
-              { backgroundColor: index ? "#E9E0D3" : "#DCE5D7" },
-            ]}
-          >
-            <Volume2 size={21} color={C.green} strokeWidth={1.5} />
+    <View style={{ gap: 18 }}>
+      {groups.map(group => (
+        <View key={group.title} style={{ gap: 10 }}>
+          <Eyebrow>{group.title} · {group.items.length}</Eyebrow>
+          <View style={[s.row, { flexWrap: "wrap", gap: 12 }]}>
+            {group.items.map((p, index) => (
+              <Pressable
+                accessibilityRole="radio"
+                accessibilityState={{ checked: listen.profile === p.id }}
+                aria-checked={listen.profile === p.id}
+                accessibilityLabel={`${p.label}, ${p.kind === 'demo' ? 'demo sistem sesi' : p.stage === 'preview' ? 'ElevenLabs AI deneme kaydı' : 'ElevenLabs AI anlatıcı'}`}
+                onPress={() => { listen.changeProfile(p.id); onSelect?.(); }}
+                key={p.id}
+                style={({ hovered }: { pressed: boolean; hovered?: boolean }) => [
+                  s.profileCard,
+                  listen.profile === p.id && s.profileActive,
+                  hovered && { borderColor: C.green },
+                ]}
+              >
+                <View
+                  style={[
+                    s.avatar,
+                    { backgroundColor: index ? "#E9E0D3" : "#DCE5D7" },
+                  ]}
+                >
+                  <Volume2 size={21} color={C.green} strokeWidth={1.5} />
+                </View>
+                <View style={{ flex: 1, gap: 4 }}>
+                  <Label style={s.medium}>{p.label}</Label>
+                  <Label style={s.small}>{p.kind === 'ai' ? p.badge : p.description}</Label>
+                </View>
+                {listen.profile === p.id ? (
+                  <View style={s.check}>
+                    <Check size={13} color="white" />
+                  </View>
+                ) : (
+                  <View style={s.emptyCheck} />
+                )}
+              </Pressable>
+            ))}
           </View>
-          <View style={{ flex: 1, gap: 4 }}>
-            <Label style={s.medium}>{p.label}</Label>
-            <Label style={s.small}>{p.description}</Label>
-          </View>
-          {listen.profile === p.id ? (
-            <View style={s.check}>
-              <Check size={13} color="white" />
-            </View>
-          ) : (
-            <View style={s.emptyCheck} />
-          )}
-        </Pressable>
+        </View>
       ))}
     </View>
   );
@@ -956,7 +968,7 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
                   </View>
                 </View>
                 <View style={{ marginTop: 32, gap: 15 }}>
-                  <Text style={s.sectionTitle}>Okuma profili</Text>
+                  <Text style={s.sectionTitle}>{hasAiNarrators ? 'Anlatıcılar' : 'Okuma profili'}</Text>
                   <ProfileCards listen={listen} />
                   <Label style={[s.small, { lineHeight: 21 }]}>
                     {profileExplanation}
@@ -1163,8 +1175,8 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
               onPress={() => openSheet("sleep")}
             />
             <IconButton
-              icon={SlidersHorizontal}
-              label="Okuma profili seç"
+              icon={hasAiNarrators ? ArrowLeftRight : SlidersHorizontal}
+              label={hasAiNarrators ? "Ses değiştir" : "Okuma profili seç"}
               onPress={() => openSheet("profiles")}
             />
             <View style={s.divider} />
@@ -1202,7 +1214,7 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
               ) : (
                 <Text style={s.sectionTitle}>
                   {sheet === "profiles"
-                    ? "Okuma profilini seç"
+                    ? hasAiNarrators ? "Anlatıcını seç" : "Okuma profilini seç"
                     : sheet === "speed"
                       ? "Kendi hızında dinle"
                       : sheet === "sleep"
@@ -1248,11 +1260,12 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
                     </Pressable>
                     <Pressable
                       accessibilityRole="button"
+                      accessibilityLabel={hasAiNarrators ? "Ses değiştir" : "Okuma profili seç"}
                       onPress={() => openSheet("profiles", true)}
                       style={s.playerOption}
                     >
-                      <SlidersHorizontal size={21} color={C.green} />
-                      <Label style={s.small}>Profil</Label>
+                      <ArrowLeftRight size={21} color={C.green} />
+                      <Label style={s.small}>{hasAiNarrators ? 'Ses değiştir' : 'Profil'}</Label>
                     </Pressable>
                     <Pressable
                       accessibilityRole="button"
@@ -1294,7 +1307,10 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
                   <Label style={[s.subtitle, { lineHeight: 23 }]}>
                     {profileExplanation}
                   </Label>
-                  <ProfileCards listen={listen} />
+                  <Label style={s.small}>
+                    Şu an: {profile.label} · {Number(listen.paragraph.id.slice(1))}. paragraf
+                  </Label>
+                  <ProfileCards listen={listen} onSelect={closeSheet} />
                   <Label style={s.small}>
                     {hasAiNarrators ? narratorReviewNotice : 'Doğal AI anlatıcılar ticari hakları doğrulandıktan sonra eklenecek.'}
                   </Label>

@@ -1,6 +1,6 @@
 # ElevenLabs anlatıcı entegrasyonu
 
-5 Ekim 2026. Altı Voice ID `.env` / `.env.example` içine tanımlandı. İlk sesle 8 paragrafın gerçek ElevenLabs kayıtları üretildi ve Android emülatöründe AI deneme profili olarak oynatıldı. Diğer beş ses, ticari haklar ve dinleme kalitesi henüz doğrulanmadı. Sonuçlar: [ELEVENLABS-TRIAL.md](ELEVENLABS-TRIAL.md).
+5 Ekim 2026. Altı Voice ID `.env` / `.env.example` içine tanımlandı. Her sesle 8 paragrafın gerçek ElevenLabs kayıtları üretildi ve Android emülatöründe **Ses değiştir** üzerinden AI deneme olarak kullanılabilir. Ticari haklar ve insan dinleme kalitesi henüz doğrulanmadı. Güncel sonuçlar: [VOICE-SWITCH.md](VOICE-SWITCH.md). İlk entegrasyon kaydı: [ELEVENLABS-TRIAL.md](ELEVENLABS-TRIAL.md).
 
 ## Anahtar
 
@@ -10,7 +10,7 @@ Sohbette paylaşılan anahtar yerel dosyaya kaydedilmedi. ElevenLabs panelinde b
 ELEVENLABS_API_KEY=YENI_ANAHTAR
 ```
 
-`EXPO_PUBLIC_` öneki kullanma. `.env` git dışında kalır. Anahtar yalnızca Node geliştirme komutuyla `xi-api-key` başlığında ElevenLabs'e gönderilir; mobil arayüz ve oynatıcı servis çağrısı yapmaz. Mobil paket yalnızca onaylanmış ses varlıklarını alır. `.env.example` gerçek anahtar içermez. `.env` dosyasını paylaşma.
+`EXPO_PUBLIC_` öneki kullanma. `.env` git dışında kalır. Anahtar yalnızca Node geliştirme komutuyla `xi-api-key` başlığında ElevenLabs'e gönderilir; mobil arayüz ve oynatıcı servis çağrısı yapmaz. Geliştirme uygulaması önceden üretilmiş deneme seslerini oynatır; ticari kurulum ayrıca inceleme gerektirir. `.env.example` gerçek anahtar içermez. `.env` dosyasını paylaşma.
 
 Sesler sırasıyla `eleven-1` … `eleven-6` kimliklerine eşlenir. `ELEVENLABS_VOICE_N_LABEL` alanından kullanıcıya gösterilecek adı değiştirebilirsin; şu an adlar **Anlatıcı 1–6**, sağlayıcının gerçek isimleri değildir. Model varsayılanı `eleven_multilingual_v2`.
 
@@ -57,7 +57,7 @@ Ses çıktısı `pcm_24000` alınır ve mono 16 bit WAV başlığı eklenir. PCM
 
 ## Uygulamada etkinleştirme
 
-Kullanıcı yerel emülatör denemesi istediğinde `npm.cmd run tts:preview -- --narrator eleven-1` komutuyla, tam hikâyesi hazır olan tek ses geliştirme arayüzünde **AI deneme** etiketiyle dinlenebilir. Kalite ve hak onayı verilmez; demo profilleri korunur. `__DEV__` olmayan arayüzde deneme profili görünmez; prototip çıktı dosyaları yayıma hazır sayılmaz.
+`npm.cmd run tts:preview -- --narrator eleven-1` komutu tam hikâyesi hazır olan seçili sesi geliştirme arayüzüne **AI deneme** etiketiyle ekler. Komutu `eleven-2` … `eleven-6` için çalıştırmak diğer sesleri silmeden ekler; mevcut projede altı ses de hazırdır. Kalite ve hak onayı verilmez; demo profilleri korunur. Tam oynatıcıdaki **Ses değiştir** seçimi yeni üretim yapmaz. `__DEV__` olmayan arayüzde deneme profili görünmez; prototip çıktı dosyaları yayıma hazır sayılmaz.
 
 Normal/ticari anlatıcı kurulumunda ilk ürün talebindeki dinleme ve ticari hak doğrulaması `tts:install` öncesinde tamamlanmalıdır.
 

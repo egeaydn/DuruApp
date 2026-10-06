@@ -2,14 +2,214 @@
   "reviewDate": "2026-10-05",
   "commercialReleaseApproved": false,
   "assets": [
-    { "type": "book", "id": "kiyidaki-isik", "version": "1.0.0", "source": "content/story.json", "provenance": "Bu prototip için sıfırdan yazılan özgün hikâye; dış kitap veya çeviri kullanılmadı.", "rightsStatus": "Original prototype content; publication legal review pending", "translation": null },
-    { "type": "cover", "id": "kiyidaki-isik-cover", "source": "src/Cover.tsx", "provenance": "Bu prototip için kodla çizilen özgün SVG; dış kapak görseli kullanılmadı.", "rightsStatus": "Original prototype artwork; publication legal review pending" },
-    { "type": "voice", "id": "demo-tolga", "source": "Windows SAPI / Microsoft Tolga tr-TR", "profiles": ["demo-standard", "demo-slow"], "provenance": "Kurulu Türkçe sistem sesi; aynı sesin iki farklı okuma hızı. Önceden kaydedilmiş demo WAV dosyaları.", "rightsStatus": "Commercial audio redistribution rights NOT verified", "aiNarrator": false, "contract": null, "aiNarrationScope": "not verified", "digitalDistributionScope": "not verified", "offlineScope": "not verified", "territories": null, "expiresAt": null },
-    { "type": "voice", "id": "eleven-1", "source": "ElevenLabs Voice Library", "voiceId": "GLHtjkeLJ9Rxcv9JhLmh", "providerName": "Muhammer Arabacı - Enthusiastic, Direct", "modelId": "eleven_multilingual_v2", "audio": "assets/audio/eleven-1.wav", "reviewRecord": "assets/audio/eleven-1/rights-and-review.json", "stage": "preview", "provenance": "Özgün hikâyenin 8 paragrafı sağlayıcının kütüphane sesiyle önceden üretildi; uygulamada AI deneme olarak gösterilir.", "rightsStatus": "Trial only; commercial distribution and listening review NOT verified", "aiNarrator": true, "contract": null, "aiNarrationScope": "not verified", "digitalDistributionScope": "not verified", "offlineScope": "not verified", "territories": null, "expiresAt": null }
+    {
+      "type": "book",
+      "id": "kiyidaki-isik",
+      "version": "1.0.0",
+      "source": "content/story.json",
+      "provenance": "Bu prototip için sıfırdan yazılan özgün hikâye; dış kitap veya çeviri kullanılmadı.",
+      "rightsStatus": "Original prototype content; publication legal review pending",
+      "translation": null
+    },
+    {
+      "type": "cover",
+      "id": "kiyidaki-isik-cover",
+      "source": "src/Cover.tsx",
+      "provenance": "Bu prototip için kodla çizilen özgün SVG; dış kapak görseli kullanılmadı.",
+      "rightsStatus": "Original prototype artwork; publication legal review pending"
+    },
+    {
+      "type": "voice",
+      "id": "demo-tolga",
+      "source": "Windows SAPI / Microsoft Tolga tr-TR",
+      "profiles": [
+        "demo-standard",
+        "demo-slow"
+      ],
+      "provenance": "Kurulu Türkçe sistem sesi; aynı sesin iki farklı okuma hızı. Önceden kaydedilmiş demo WAV dosyaları.",
+      "rightsStatus": "Commercial audio redistribution rights NOT verified",
+      "aiNarrator": false,
+      "contract": null,
+      "aiNarrationScope": "not verified",
+      "digitalDistributionScope": "not verified",
+      "offlineScope": "not verified",
+      "territories": null,
+      "expiresAt": null
+    },
+    {
+      "type": "voice",
+      "id": "eleven-1",
+      "source": "ElevenLabs Voice Library",
+      "voiceId": "GLHtjkeLJ9Rxcv9JhLmh",
+      "providerName": "Muhammer Arabacı - Enthusiastic, Direct",
+      "modelId": "eleven_multilingual_v2",
+      "audio": "assets/audio/eleven-1.wav",
+      "reviewRecord": "assets/audio/eleven-1/rights-and-review.json",
+      "stage": "preview",
+      "provenance": "Özgün hikâyenin 8 paragrafı sağlayıcı sesiyle önceden üretildi; uygulamada AI deneme olarak gösterilir.",
+      "rightsStatus": "Trial only; commercial distribution and listening review NOT verified",
+      "aiNarrator": true,
+      "contract": null,
+      "aiNarrationScope": "not verified",
+      "digitalDistributionScope": "not verified",
+      "offlineScope": "not verified",
+      "territories": null,
+      "expiresAt": null,
+      "processing": {
+        "version": "duru-clean-v1",
+        "date": "2026-10-06",
+        "record": "assets/audio/elevenlabs-manifest.json",
+        "notes": "Yerel hafif cızırtı temizleme; ham kaynaklar yerel üretim önbelleğinde korunur. Tam dinleme ve ticari hak onayı yerine geçmez."
+      }
+    },
+    {
+      "type": "voice",
+      "id": "eleven-2",
+      "source": "ElevenLabs Voice Library",
+      "voiceId": "Md4RAnfKt9kVIbvqUxly",
+      "providerName": "Cihan - Warm, Natural and Friendly",
+      "modelId": "eleven_multilingual_v2",
+      "audio": "assets/audio/eleven-2.wav",
+      "reviewRecord": "assets/audio/eleven-2/rights-and-review.json",
+      "stage": "preview",
+      "provenance": "Özgün hikâyenin 8 paragrafı sağlayıcı sesiyle önceden üretildi; uygulamada AI deneme olarak gösterilir.",
+      "rightsStatus": "Trial only; commercial distribution and listening review NOT verified",
+      "aiNarrator": true,
+      "contract": null,
+      "aiNarrationScope": "not verified",
+      "digitalDistributionScope": "not verified",
+      "offlineScope": "not verified",
+      "territories": null,
+      "expiresAt": null,
+      "processing": {
+        "version": "duru-clean-v1",
+        "date": "2026-10-06",
+        "record": "assets/audio/elevenlabs-manifest.json",
+        "notes": "Yerel hafif cızırtı temizleme; ham kaynaklar yerel üretim önbelleğinde korunur. Tam dinleme ve ticari hak onayı yerine geçmez."
+      }
+    },
+    {
+      "type": "voice",
+      "id": "eleven-3",
+      "source": "ElevenLabs Voice Library",
+      "voiceId": "sqN4QwtcnanCCWx6TTYj",
+      "providerName": "Eyyup Okan - Dynamic and Authentic",
+      "modelId": "eleven_multilingual_v2",
+      "audio": "assets/audio/eleven-3.wav",
+      "reviewRecord": "assets/audio/eleven-3/rights-and-review.json",
+      "stage": "preview",
+      "provenance": "Özgün hikâyenin 8 paragrafı sağlayıcı sesiyle önceden üretildi; uygulamada AI deneme olarak gösterilir.",
+      "rightsStatus": "Trial only; commercial distribution and listening review NOT verified",
+      "aiNarrator": true,
+      "contract": null,
+      "aiNarrationScope": "not verified",
+      "digitalDistributionScope": "not verified",
+      "offlineScope": "not verified",
+      "territories": null,
+      "expiresAt": null,
+      "processing": {
+        "version": "duru-clean-v1",
+        "date": "2026-10-06",
+        "record": "assets/audio/elevenlabs-manifest.json",
+        "notes": "Yerel hafif cızırtı temizleme; ham kaynaklar yerel üretim önbelleğinde korunur. Tam dinleme ve ticari hak onayı yerine geçmez."
+      }
+    },
+    {
+      "type": "voice",
+      "id": "eleven-4",
+      "source": "ElevenLabs Voice Library",
+      "voiceId": "J17lijyP1BHYcM7ld0Rg",
+      "providerName": "Adam - Deep, Professional and Serious",
+      "modelId": "eleven_multilingual_v2",
+      "audio": "assets/audio/eleven-4.wav",
+      "reviewRecord": "assets/audio/eleven-4/rights-and-review.json",
+      "stage": "preview",
+      "provenance": "Özgün hikâyenin 8 paragrafı sağlayıcı sesiyle önceden üretildi; uygulamada AI deneme olarak gösterilir.",
+      "rightsStatus": "Trial only; commercial distribution and listening review NOT verified",
+      "aiNarrator": true,
+      "contract": null,
+      "aiNarrationScope": "not verified",
+      "digitalDistributionScope": "not verified",
+      "offlineScope": "not verified",
+      "territories": null,
+      "expiresAt": null,
+      "processing": {
+        "version": "duru-clean-v1",
+        "date": "2026-10-06",
+        "record": "assets/audio/elevenlabs-manifest.json",
+        "notes": "Yerel hafif cızırtı temizleme; ham kaynaklar yerel üretim önbelleğinde korunur. Tam dinleme ve ticari hak onayı yerine geçmez."
+      }
+    },
+    {
+      "type": "voice",
+      "id": "eleven-5",
+      "source": "ElevenLabs Voice Library",
+      "voiceId": "5RqXmIU9ikjifeWoXHMG",
+      "providerName": "Ayça -  Young and Energetic",
+      "modelId": "eleven_multilingual_v2",
+      "audio": "assets/audio/eleven-5.wav",
+      "reviewRecord": "assets/audio/eleven-5/rights-and-review.json",
+      "stage": "preview",
+      "provenance": "Özgün hikâyenin 8 paragrafı sağlayıcı sesiyle önceden üretildi; uygulamada AI deneme olarak gösterilir.",
+      "rightsStatus": "Trial only; commercial distribution and listening review NOT verified",
+      "aiNarrator": true,
+      "contract": null,
+      "aiNarrationScope": "not verified",
+      "digitalDistributionScope": "not verified",
+      "offlineScope": "not verified",
+      "territories": null,
+      "expiresAt": null,
+      "processing": {
+        "version": "duru-clean-v1",
+        "date": "2026-10-06",
+        "record": "assets/audio/elevenlabs-manifest.json",
+        "notes": "Yerel hafif cızırtı temizleme; ham kaynaklar yerel üretim önbelleğinde korunur. Tam dinleme ve ticari hak onayı yerine geçmez."
+      }
+    },
+    {
+      "type": "voice",
+      "id": "eleven-6",
+      "source": "ElevenLabs Voice Library",
+      "voiceId": "NNn9dv8zq2kUo7d3JSGG",
+      "providerName": "Derya - Dynamic and Friendly Narrator",
+      "modelId": "eleven_multilingual_v2",
+      "audio": "assets/audio/eleven-6.wav",
+      "reviewRecord": "assets/audio/eleven-6/rights-and-review.json",
+      "stage": "preview",
+      "provenance": "Özgün hikâyenin 8 paragrafı sağlayıcı sesiyle önceden üretildi; uygulamada AI deneme olarak gösterilir.",
+      "rightsStatus": "Trial only; commercial distribution and listening review NOT verified",
+      "aiNarrator": true,
+      "contract": null,
+      "aiNarrationScope": "not verified",
+      "digitalDistributionScope": "not verified",
+      "offlineScope": "not verified",
+      "territories": null,
+      "expiresAt": null,
+      "processing": {
+        "version": "duru-clean-v1",
+        "date": "2026-10-06",
+        "record": "assets/audio/elevenlabs-manifest.json",
+        "notes": "Yerel hafif cızırtı temizleme; ham kaynaklar yerel üretim önbelleğinde korunur. Tam dinleme ve ticari hak onayı yerine geçmez."
+      }
+    }
   ],
   "thirdPartyAssets": [
-    { "id": "Lora and Manrope fonts", "source": "@expo-google-fonts packages", "license": "SIL Open Font License 1.1; packaged license files in node_modules", "note": "Retain required license notices when distributing." },
-    { "id": "Lucide icons", "source": "lucide-react-native", "license": "ISC; packaged license in node_modules" }
+    {
+      "id": "Lora and Manrope fonts",
+      "source": "@expo-google-fonts packages",
+      "license": "SIL Open Font License 1.1; packaged license files in node_modules",
+      "note": "Retain required license notices when distributing."
+    },
+    {
+      "id": "Lucide icons",
+      "source": "lucide-react-native",
+      "license": "ISC; packaged license in node_modules"
+    }
   ],
-  "releaseGates": ["Verify narrator identity and commercial contract", "Record AI narration, distribution, territory, duration and offline rights", "Legal review before publication", "Replace demo voice recordings before commercial release"]
+  "releaseGates": [
+    "Verify narrator identity and commercial contract",
+    "Record AI narration, distribution, territory, duration and offline rights",
+    "Legal review before publication",
+    "Replace demo voice recordings before commercial release"
+  ]
 }

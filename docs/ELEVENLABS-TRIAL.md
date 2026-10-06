@@ -2,6 +2,8 @@
 
 Tarih: 5 Ekim 2026. Özgün `Kıyıdaki Işık` metni v1.0.0, ilk seçilen Voice ID `GLHtjkeLJ9Rxcv9JhLmh`. Sağlayıcı kütüphanesindeki adı: **Muhammer Arabacı - Enthusiastic, Direct**. Uygulamada **Anlatıcı 1 · AI deneme** olarak gösterilir.
 
+Bu belge ilk tek ses denemesinin kaydıdır. Sonraki çalışmada altı ses de hazırlandı; güncel kullanım ve doğrulama: [VOICE-SWITCH.md](VOICE-SWITCH.md).
+
 ## Sonuç
 
 - Model: `eleven_multilingual_v2`, çıktı: `pcm_24000` → mono 16 bit WAV.
@@ -32,7 +34,7 @@ Pixel 9, Android API 36, `app.duru.prototype` geliştirme derlemesi:
 - Görsel çıktı: `native-test-results/android-elevenlabs.png`.
 - TypeScript, 11/11 davranış testi, web paketleme ve web kabul testi geçti. Gerçek yerel API anahtarının byte dizisi `dist/` dosyalarında bulunmadı.
 
-Bu, insan tarafından ses kalitesi veya fiziksel telefon testi değildir. Diğer beş sesin kayıtları henüz üretilmedi. 10–15 dakikalık ortak metin üzerinde sağlayıcı karşılaştırması yapılmadı.
+Bu, insan tarafından ses kalitesi veya fiziksel telefon testi değildir. İlk deneme sırasında diğer beş sesin kayıtları üretilmemişti; sonraki çalışmada tamamlandı: [VOICE-SWITCH.md](VOICE-SWITCH.md). 10–15 dakikalık ortak metin üzerinde sağlayıcı karşılaştırması yapılmadı.
 
 ## Deneme ile ticari kurulum
 
@@ -45,6 +47,8 @@ npm.cmd run android
 ```
 
 API anahtarı telefona konmaz; sesler önceden üretilir. Bu dosyalar hazırsa uygulamayı açmak için yeni TTS üretimi gerekmez. Diğer bir seçilmiş ses için `eleven-2` … `eleven-6` kullan. Varsayılan olarak altı tam hikâye birden üretilmez.
+
+Günlük `android` komutu Expo terminalini açık tutar; ilk native kurulum için `npm.cmd run android:build` kullan.
 
 Deneme, kalite ve ticari hak onaylarını **true** yapmaz. `stage: preview` profilleri `__DEV__` olmayan arayüzde gösterilmez. Bununla birlikte prototip web paketinde WAV varlığı hâlâ bulunabilir; bu prototip paketini ticari yayımlama. İnceleme tamamlandıktan sonra normal `tts:install` yolunu kullan; yayın öncesi hak/dağıtım/çevrimdışı kapsamı ve hukuki inceleme gerekliliği sürer.
 

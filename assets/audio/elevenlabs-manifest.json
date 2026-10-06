@@ -9,12 +9,52 @@
       "kind": "ai",
       "stage": "preview",
       "badge": "AI deneme"
+    },
+    {
+      "id": "eleven-2",
+      "label": "Anlatıcı 2",
+      "description": "ElevenLabs · Deneme kaydı · Hak incelemesi bekliyor",
+      "kind": "ai",
+      "stage": "preview",
+      "badge": "AI deneme"
+    },
+    {
+      "id": "eleven-3",
+      "label": "Anlatıcı 3",
+      "description": "ElevenLabs · Deneme kaydı · Hak incelemesi bekliyor",
+      "kind": "ai",
+      "stage": "preview",
+      "badge": "AI deneme"
+    },
+    {
+      "id": "eleven-4",
+      "label": "Anlatıcı 4",
+      "description": "ElevenLabs · Deneme kaydı · Hak incelemesi bekliyor",
+      "kind": "ai",
+      "stage": "preview",
+      "badge": "AI deneme"
+    },
+    {
+      "id": "eleven-5",
+      "label": "Anlatıcı 5",
+      "description": "ElevenLabs · Deneme kaydı · Hak incelemesi bekliyor",
+      "kind": "ai",
+      "stage": "preview",
+      "badge": "AI deneme"
+    },
+    {
+      "id": "eleven-6",
+      "label": "Anlatıcı 6",
+      "description": "ElevenLabs · Deneme kaydı · Hak incelemesi bekliyor",
+      "kind": "ai",
+      "stage": "preview",
+      "badge": "AI deneme"
     }
   ],
   "profiles": {
     "eleven-1": {
       "duration": 210.18699999999998,
-      "sha256": "cc7e12a52e657e913d7f338e0a5af548480ff4bd78e7a5eea94eb0ebf787517c",
+      "sha256": "5c36df76c971354277d821ee6b503ddf4c7e7cbeaa2723415d8fcd5cb40503af",
       "voiceId": "GLHtjkeLJ9Rxcv9JhLmh",
       "modelId": "eleven_multilingual_v2",
       "paragraphs": [
@@ -23,58 +63,450 @@
           "start": 0,
           "duration": 26.006333333333334,
           "file": "eleven-1/p01.wav",
-          "sha256": "02fd0058509cce3089791c08a3ccfb0888591650644b5ff1ad807accccd2a0c7"
+          "sha256": "831cb635658bdfe1f1a52ba79739d3980eec06181f086de90a8335f371e84352",
+          "sourceSha256": "02fd0058509cce3089791c08a3ccfb0888591650644b5ff1ad807accccd2a0c7"
         },
         {
           "id": "p02",
           "start": 26.006333333333334,
           "duration": 25.913458333333335,
           "file": "eleven-1/p02.wav",
-          "sha256": "1de6575981778bee93746b62f089834f67e44798b359bb15a818cd553ed71c12"
+          "sha256": "87228267f227ef14c6a57beb6d2498d512f47393846ee012968606eae6067b69",
+          "sourceSha256": "1de6575981778bee93746b62f089834f67e44798b359bb15a818cd553ed71c12"
         },
         {
           "id": "p03",
           "start": 51.91979166666667,
           "duration": 28.560541666666666,
           "file": "eleven-1/p03.wav",
-          "sha256": "20b2eed88fa8cf67a708663758933a48b7e88e858b9d3e48182ae8f013e07fdb"
+          "sha256": "d41e65d0e885c3b185ebe97e7fe828436adec16b9c40fb04530d57b862ed9e88",
+          "sourceSha256": "20b2eed88fa8cf67a708663758933a48b7e88e858b9d3e48182ae8f013e07fdb"
         },
         {
           "id": "p04",
           "start": 80.48033333333333,
           "duration": 26.47075,
           "file": "eleven-1/p04.wav",
-          "sha256": "8e03f750c70629b990a2a1e6faecf5943c8ff179086e1a685eec8d58c33e4ae4"
+          "sha256": "443b4cc4551fc944194fb5a1ebd294dc63898dd84fc95fafb1893487db868117",
+          "sourceSha256": "8e03f750c70629b990a2a1e6faecf5943c8ff179086e1a685eec8d58c33e4ae4"
         },
         {
           "id": "p05",
           "start": 106.95108333333333,
           "duration": 25.031125,
           "file": "eleven-1/p05.wav",
-          "sha256": "fea05291712f9900c3308328041f94b699c45a4e1be8b2da1769c8bfe67b3a71"
+          "sha256": "dedf3d02a9c49d89978d792fdb34932192df82926851c07eaf6c6b7d3a9fd7ee",
+          "sourceSha256": "fea05291712f9900c3308328041f94b699c45a4e1be8b2da1769c8bfe67b3a71"
         },
         {
           "id": "p06",
           "start": 131.98220833333332,
           "duration": 25.541958333333334,
           "file": "eleven-1/p06.wav",
-          "sha256": "6f73f934ebbc74bccc664c29f6432a07b224894543be16c77ff8ec3c706e5f63"
+          "sha256": "d16392ac65dcf99e6b6950e10dded4e790c3ab6b56adbc22729a2901a6cc2fa5",
+          "sourceSha256": "6f73f934ebbc74bccc664c29f6432a07b224894543be16c77ff8ec3c706e5f63"
         },
         {
           "id": "p07",
           "start": 157.52416666666664,
           "duration": 27.399541666666668,
           "file": "eleven-1/p07.wav",
-          "sha256": "fc334366fb0472c2a600ddb00a435b19b3663e61e728e64cb04da4b532189a5a"
+          "sha256": "ef5e2f58669a734ba59508eade4075a49b19a412c286ef76ca6f04577dee0dca",
+          "sourceSha256": "fc334366fb0472c2a600ddb00a435b19b3663e61e728e64cb04da4b532189a5a"
         },
         {
           "id": "p08",
           "start": 184.9237083333333,
           "duration": 25.263291666666667,
           "file": "eleven-1/p08.wav",
-          "sha256": "2c8c4e9f21b7419b5ee51946536046c4ad9bce02e570a0dcf2308667f4ed9455"
+          "sha256": "5caf882aea56bfd00d0f367ccc54440c8f6e6df711aeb11be984d32fbcfcc65d",
+          "sourceSha256": "2c8c4e9f21b7419b5ee51946536046c4ad9bce02e570a0dcf2308667f4ed9455"
         }
-      ]
+      ],
+      "processing": {
+        "version": "duru-clean-v1",
+        "filter": "adeclick=t=3,afftdn=nr=6:nf=-45:tn=1,alimiter=limit=0.891251:level=false:latency=true"
+      }
+    },
+    "eleven-2": {
+      "duration": 210.69791666666666,
+      "sha256": "975389367656f3a27c910c6bfd6d8ce11b5a55e48a4db5963566e57afa9f2029",
+      "voiceId": "Md4RAnfKt9kVIbvqUxly",
+      "modelId": "eleven_multilingual_v2",
+      "paragraphs": [
+        {
+          "id": "p01",
+          "start": 0,
+          "duration": 27.213791666666665,
+          "file": "eleven-2/p01.wav",
+          "sha256": "40ada4829ea68c2570b072594e1e2e1b6aa7de3d52b55674ed0363c48ee1bca1",
+          "sourceSha256": "c1ff7911b704700fe5473532f53bff0b9dc4e9224667f9e7c5e35e0a65049274"
+        },
+        {
+          "id": "p02",
+          "start": 27.213791666666665,
+          "duration": 27.399541666666668,
+          "file": "eleven-2/p02.wav",
+          "sha256": "64cda268166ed153f53d943e7e64d9ad856b93ddc68eacaac7df670dbfaa7796",
+          "sourceSha256": "500dcddcaf000ed4ca8464c6285c024900bd883e60131e918197f5d902bca5bd"
+        },
+        {
+          "id": "p03",
+          "start": 54.61333333333333,
+          "duration": 28.049708333333335,
+          "file": "eleven-2/p03.wav",
+          "sha256": "4b38a5c95bebfa9c135d7c0ecb1112a090e52dc9e873d83a7b7b686de2085711",
+          "sourceSha256": "4396b87d1431399caef9aabbe8f9ef4b20a5ece3fe47b3fd70d763246b47a0d7"
+        },
+        {
+          "id": "p04",
+          "start": 82.66304166666666,
+          "duration": 24.288083333333333,
+          "file": "eleven-2/p04.wav",
+          "sha256": "e868ff2060f76745900d69754abdbc4ba397544843edbc3b9ad61347c2582b17",
+          "sourceSha256": "285de84a6a2003d3c8b2ec00a6040db932dc3883b81437799f5a1428d43c7369"
+        },
+        {
+          "id": "p05",
+          "start": 106.95112499999999,
+          "duration": 26.285,
+          "file": "eleven-2/p05.wav",
+          "sha256": "c11e7dd9c149a284bf2432981a812eef850876b273a6389cbbdf4b5f5d4a6dd8",
+          "sourceSha256": "4203382f285e19b752466ee304406145d5e0d2335cbc2d206704c9e5151732c9"
+        },
+        {
+          "id": "p06",
+          "start": 133.236125,
+          "duration": 26.47075,
+          "file": "eleven-2/p06.wav",
+          "sha256": "cb37ce178a44e8134b280a5ea122099853012e8cbfa44b7ad89ff962990331c1",
+          "sourceSha256": "df10472ad82700489ba790ee44c2a7031d5385a38ed23a832138a457e0304074"
+        },
+        {
+          "id": "p07",
+          "start": 159.706875,
+          "duration": 26.285,
+          "file": "eleven-2/p07.wav",
+          "sha256": "0dc73f0946ede66d1fedff9d0211664336c66f0c9f0201fc56e6ffb532c858bd",
+          "sourceSha256": "10710a25d443e1e4e3fe9cc4548e953135a45318c2c674f71da85591ad183b1e"
+        },
+        {
+          "id": "p08",
+          "start": 185.991875,
+          "duration": 24.706041666666668,
+          "file": "eleven-2/p08.wav",
+          "sha256": "d82c5b3191d7735a3ba55fbbccf5544487d8847dfa79eba0ebae93eeefebf8c1",
+          "sourceSha256": "5e52bd4dd9a446b6d503a5082f38591c38b003b252e97ea156c81c9ce4f39b34"
+        }
+      ],
+      "processing": {
+        "version": "duru-clean-v1",
+        "filter": "adeclick=t=3,afftdn=nr=6:nf=-45:tn=1,alimiter=limit=0.891251:level=false:latency=true"
+      }
+    },
+    "eleven-3": {
+      "duration": 226.30170833333335,
+      "sha256": "97a849198174821306d2ca1050657917ff2c82c7786a84a153ea961d07344aa1",
+      "voiceId": "sqN4QwtcnanCCWx6TTYj",
+      "modelId": "eleven_multilingual_v2",
+      "paragraphs": [
+        {
+          "id": "p01",
+          "start": 0,
+          "duration": 27.724625,
+          "file": "eleven-3/p01.wav",
+          "sha256": "88fa0a0559ac15e7519ff0bc5ce57f9b86894a375e6a6e2d106f6a7ab8fdfc6e",
+          "sourceSha256": "d81779a957f662abd7b6f81c69180939341a4af3e26f6d8fbea1223784959ca9"
+        },
+        {
+          "id": "p02",
+          "start": 27.724625,
+          "duration": 28.932083333333335,
+          "file": "eleven-3/p02.wav",
+          "sha256": "670101eb4de5ff3ca65bfae502363356f6f75e7242b833fbd232e94a0561e0c6",
+          "sourceSha256": "51684e6fbea5536d1e48e2b9791cd4da05f83710cab9a16b93c43084696cbaad"
+        },
+        {
+          "id": "p03",
+          "start": 56.656708333333334,
+          "duration": 28.374791666666667,
+          "file": "eleven-3/p03.wav",
+          "sha256": "1d17ec74bd4b90edd8b0545dcec23c0df4bee82e2e6d4ec0280770963e4a5f31",
+          "sourceSha256": "60a097887917ded17ae7c86a1a1b51abe4920c516e3022dbb3ecbe611426134c"
+        },
+        {
+          "id": "p04",
+          "start": 85.0315,
+          "duration": 29.117833333333333,
+          "file": "eleven-3/p04.wav",
+          "sha256": "6a224a2e790296e892d3340c673f3aa387d1c880b5ddc591b81ecd3379579fd4",
+          "sourceSha256": "aac43971a429f06270c0d7e73038d73f50a62cbf8b2bc64635a5cf4610d6f32c"
+        },
+        {
+          "id": "p05",
+          "start": 114.14933333333333,
+          "duration": 28.746291666666668,
+          "file": "eleven-3/p05.wav",
+          "sha256": "6fb54fd5eb317ed57058541d25d24cbdacce442eab229f68c134bfcf3ab641a7",
+          "sourceSha256": "cf015f2d2a534760d2f17b4b1db4dd09866d4da95a47093bab1e3608aa497777"
+        },
+        {
+          "id": "p06",
+          "start": 142.895625,
+          "duration": 28.374791666666667,
+          "file": "eleven-3/p06.wav",
+          "sha256": "82d43c52a66e07f33e8d7212ab6e3a015a647467cff20391b4ada180a4401aa6",
+          "sourceSha256": "b59fb5c7ea6aa29de53a00e37fb3111c3eb91c5897aa8efc6917cc05ddb86596"
+        },
+        {
+          "id": "p07",
+          "start": 171.27041666666668,
+          "duration": 27.724625,
+          "file": "eleven-3/p07.wav",
+          "sha256": "0b1c1d244a320afc81aa37c292bd8bbf778f7171548d3c183561391d96ab422d",
+          "sourceSha256": "c49a45766128ce03fdd2bea0009cfb2564f15e3a393f4831b80ecaeb7577ec53"
+        },
+        {
+          "id": "p08",
+          "start": 198.99504166666668,
+          "duration": 27.30666666666667,
+          "file": "eleven-3/p08.wav",
+          "sha256": "45ce1ff32be72c5ba59c6daf17d0c58680699f44eedc11495d28e2a3fd043438",
+          "sourceSha256": "69b52b0d4b91447f15c9c23f75bfc43f2aebb38fcb6c8b12bcb45866bea9da12"
+        }
+      ],
+      "processing": {
+        "version": "duru-clean-v1",
+        "filter": "adeclick=t=3,afftdn=nr=6:nf=-45:tn=1,alimiter=limit=0.891251:level=false:latency=true"
+      }
+    },
+    "eleven-4": {
+      "duration": 232.57108333333335,
+      "sha256": "0e98515b3cdc5934389ae944c2166382de996c9558c863e0fb4e9b4e39809ac7",
+      "voiceId": "J17lijyP1BHYcM7ld0Rg",
+      "modelId": "eleven_multilingual_v2",
+      "paragraphs": [
+        {
+          "id": "p01",
+          "start": 0,
+          "duration": 30.464583333333334,
+          "file": "eleven-4/p01.wav",
+          "sha256": "11bdd6072a2d9c871d50a8b6e83269379d7b7cfb3143aa97323a1bedeb32b822",
+          "sourceSha256": "90523309b38b0814c2c1c2797cf8a7ed62df5aed32fd51943268f32c636e4ff5"
+        },
+        {
+          "id": "p02",
+          "start": 30.464583333333334,
+          "duration": 29.582208333333334,
+          "file": "eleven-4/p02.wav",
+          "sha256": "6b9ac3a08f7b2a3379d91e9575785c105d7a3eba7d3c0310b59116d3117a30a6",
+          "sourceSha256": "0a78776a8172b6114ac487875035b66937adacdfd3d317fc84c365d0ef9c2748"
+        },
+        {
+          "id": "p03",
+          "start": 60.046791666666664,
+          "duration": 29.117833333333333,
+          "file": "eleven-4/p03.wav",
+          "sha256": "a7b48f5340ee36483269767cdc955ead67241082347ce63ddc29d5a69e01918c",
+          "sourceSha256": "980866161727dda8ba69e7a8dac83479bbd913e97c888c781f6fa6bffc2dd62f"
+        },
+        {
+          "id": "p04",
+          "start": 89.164625,
+          "duration": 28.514125,
+          "file": "eleven-4/p04.wav",
+          "sha256": "204953fadc002023485dcacc47bc9a380c4ec4558aeb08d235e61aa1e5b6aeca",
+          "sourceSha256": "cce43e1299fbc34a2fa3a8b39c6fc1093fbd780272e1d459242034207d367165"
+        },
+        {
+          "id": "p05",
+          "start": 117.67875000000001,
+          "duration": 29.675083333333333,
+          "file": "eleven-4/p05.wav",
+          "sha256": "8c8116ddb2a71a25499b5bec6d73164a5c3430fe267bfcb29a9a4c032eac7a10",
+          "sourceSha256": "8c37f2ee043b3fced9bcbb318a3e8f6e0c73877a08261e00c09b91fbf6792016"
+        },
+        {
+          "id": "p06",
+          "start": 147.35383333333334,
+          "duration": 28.9785,
+          "file": "eleven-4/p06.wav",
+          "sha256": "327c6170c97f8ace981a04b1626be9bb8e3c0260b0d336fdbce36b37df023179",
+          "sourceSha256": "77a2b1b6d6add1a234a0300d9f51bb1441a2db620d6394ad68732178f2842759"
+        },
+        {
+          "id": "p07",
+          "start": 176.33233333333334,
+          "duration": 29.535791666666668,
+          "file": "eleven-4/p07.wav",
+          "sha256": "a81e6a1652d6e15283575af67293f8f6747976aed0ee4fb448b66dc378de4091",
+          "sourceSha256": "f7ee21fe62c6774392c7a9c01a2f8e55a9f478675961b83f557b80fba563a7a7"
+        },
+        {
+          "id": "p08",
+          "start": 205.86812500000002,
+          "duration": 26.702958333333335,
+          "file": "eleven-4/p08.wav",
+          "sha256": "1c4d6698a5b31c69a60a4d6b0e717de745b671509660feb7612f461f6799dedc",
+          "sourceSha256": "de3f43a7bc4ea771237dd24eb1e5c57ec3287b88a56581224e646be3265d5fde"
+        }
+      ],
+      "processing": {
+        "version": "duru-clean-v1",
+        "filter": "adeclick=t=3,afftdn=nr=6:nf=-45:tn=1,alimiter=limit=0.891251:level=false:latency=true"
+      }
+    },
+    "eleven-5": {
+      "duration": 230.43487499999998,
+      "sha256": "36fd739222b0d9ca930216e324a42478450cf2578a684534f47d9a7ddfa2dcdd",
+      "voiceId": "5RqXmIU9ikjifeWoXHMG",
+      "modelId": "eleven_multilingual_v2",
+      "paragraphs": [
+        {
+          "id": "p01",
+          "start": 0,
+          "duration": 29.535791666666668,
+          "file": "eleven-5/p01.wav",
+          "sha256": "f4a3380245bd6b184ad8842b1b98a4dce085da3a7a77297178ddf4351cfbcc85",
+          "sourceSha256": "24c53987dc97bc7195ca8b1d5accb6578bb31f4e35fec3a3bab4718b25ca291e"
+        },
+        {
+          "id": "p02",
+          "start": 29.535791666666668,
+          "duration": 27.028041666666667,
+          "file": "eleven-5/p02.wav",
+          "sha256": "7d79d4cbb6c4485241a292b4e5bdd86e29272427bbf9cfc58852073f46cd9aae",
+          "sourceSha256": "ef317c30ed27c13315a13aaa74bd9a3e1e071028fb7d6d2c5b4be0ef806ae986"
+        },
+        {
+          "id": "p03",
+          "start": 56.563833333333335,
+          "duration": 27.63175,
+          "file": "eleven-5/p03.wav",
+          "sha256": "60ea3ac55bd5fad17396f01494ff41f4d1fc5407233f292a35e89b53982790b1",
+          "sourceSha256": "209ffd20d6bf2439a1448350edf611cf598b35fb83ea56fc22c63e8b92763892"
+        },
+        {
+          "id": "p04",
+          "start": 84.19558333333333,
+          "duration": 30.603916666666667,
+          "file": "eleven-5/p04.wav",
+          "sha256": "dd677a3dd2c5a6adadc06862730d44c7449fc6101ef99873cec0f8caf8226ccc",
+          "sourceSha256": "b897d01e12784581751f5ff66df9815e02922b70d4a718d0fd4cad5a9378885b"
+        },
+        {
+          "id": "p05",
+          "start": 114.7995,
+          "duration": 29.95375,
+          "file": "eleven-5/p05.wav",
+          "sha256": "47fc558c7a21c3bbfa604d6ce007da30618fe567689d94460bb45f67beb3f9ae",
+          "sourceSha256": "7cd859f14f530b52a2963f8878fad0a43e8b407768eb425b1db46f72078b4a6c"
+        },
+        {
+          "id": "p06",
+          "start": 144.75324999999998,
+          "duration": 29.814416666666666,
+          "file": "eleven-5/p06.wav",
+          "sha256": "86544038075912cd771d91c892fce9f6d67f436b8f69965143616064218f022a",
+          "sourceSha256": "245a595171a7c73b6a2672b2798c84796c48bc29eba6ae8ec325cad92358525d"
+        },
+        {
+          "id": "p07",
+          "start": 174.56766666666664,
+          "duration": 29.117833333333333,
+          "file": "eleven-5/p07.wav",
+          "sha256": "978ed606daa4272c4b6b0b637b50d025c521ad1ae9c1f1d38c659d4095dd14ac",
+          "sourceSha256": "437e5f4c0cc103563d09a766780a33c77f864b41957036a79380a62edbf00254"
+        },
+        {
+          "id": "p08",
+          "start": 203.68549999999996,
+          "duration": 26.749375,
+          "file": "eleven-5/p08.wav",
+          "sha256": "1139fb1a926229edc619db46ac558e3f1c96a51f631e786a90da5c827bd7cd35",
+          "sourceSha256": "6e17f5935a2f38d7310f00248851f0c47a54e56513cb9dab1b9b1cb7dab7c089"
+        }
+      ],
+      "processing": {
+        "version": "duru-clean-v1",
+        "filter": "adeclick=t=3,afftdn=nr=6:nf=-45:tn=1,alimiter=limit=0.891251:level=false:latency=true"
+      }
+    },
+    "eleven-6": {
+      "duration": 196.53366666666665,
+      "sha256": "a9ddfcc69299fecc114e5d6883d8303bf875117544fad3c051a9c5219a3ea025",
+      "voiceId": "NNn9dv8zq2kUo7d3JSGG",
+      "modelId": "eleven_multilingual_v2",
+      "paragraphs": [
+        {
+          "id": "p01",
+          "start": 0,
+          "duration": 24.241625,
+          "file": "eleven-6/p01.wav",
+          "sha256": "1eff8e5c3c5b81bc2bf7f80e969e84e3acd9cf1a79fd5b2ae7d7f761da3849fa",
+          "sourceSha256": "83e338de05c7906b174d79f305082844574c239875b7dd75e6460020c798c45f"
+        },
+        {
+          "id": "p02",
+          "start": 24.241625,
+          "duration": 25.170416666666668,
+          "file": "eleven-6/p02.wav",
+          "sha256": "e65cf91663a159b6dd05be29320b88787d4f4ad3fef68d03a994577bdc6fb4bb",
+          "sourceSha256": "dbf41830d84dd117a0516e7171a1262dd99046f9f205756e1a25e0056b88413b"
+        },
+        {
+          "id": "p03",
+          "start": 49.41204166666667,
+          "duration": 25.82058333333333,
+          "file": "eleven-6/p03.wav",
+          "sha256": "ae481fc928c5ddf67e99d56f4fffd5d7fc38ac1799e2e9a4ffbbc4472ca9492f",
+          "sourceSha256": "5471f715683a032b7e62df1014399a753bee16d8753a0b01affdf4e1ac7c27db"
+        },
+        {
+          "id": "p04",
+          "start": 75.232625,
+          "duration": 24.798916666666667,
+          "file": "eleven-6/p04.wav",
+          "sha256": "bf8ee51f0ef05ebd93eff03abc9a9849a1343cd99e287c62da3f5440f6f192d6",
+          "sourceSha256": "27d9a37db661c2e0dc585dd835a810a5e347a9212217e2ee1a38bc1396d6cfad"
+        },
+        {
+          "id": "p05",
+          "start": 100.03154166666667,
+          "duration": 24.3345,
+          "file": "eleven-6/p05.wav",
+          "sha256": "47fccb958057a30bb470e22fc75ed6c3e14d8d614954623414c3c6c711c83d4c",
+          "sourceSha256": "a36ab3275285149a3d8354d5684e67037e25623ed3398456c1e3cd7256c343ad"
+        },
+        {
+          "id": "p06",
+          "start": 124.36604166666666,
+          "duration": 24.3345,
+          "file": "eleven-6/p06.wav",
+          "sha256": "3ac12877a2968802aaa74a88c35794afef5430b5c232c4db0d4217adf8e9e5e5",
+          "sourceSha256": "7ba3e952edcdc9ce40e06c7ab4a5d7bb88d9b66c85ad753e2a61b5dd4d389d95"
+        },
+        {
+          "id": "p07",
+          "start": 148.70054166666665,
+          "duration": 25.541958333333334,
+          "file": "eleven-6/p07.wav",
+          "sha256": "453eee7ff79efcbfe1cecdb6a8e4e78f955ba1b91edb4a8faaadc48528d61b92",
+          "sourceSha256": "4090d475a8bc6c685136b6c8eb40bbb3caf6896ab6d5cc0f9f9328c1ecf60973"
+        },
+        {
+          "id": "p08",
+          "start": 174.24249999999998,
+          "duration": 22.291166666666665,
+          "file": "eleven-6/p08.wav",
+          "sha256": "9e0b62b37bba4e8bc52ea5c7fe3c34d9e74e78aecf33221bf7472544a2c98d38",
+          "sourceSha256": "0e4c742cc09f888030638811355215591108c4dd4b8920eed7823122fd615e68"
+        }
+      ],
+      "processing": {
+        "version": "duru-clean-v1",
+        "filter": "adeclick=t=3,afftdn=nr=6:nf=-45:tn=1,alimiter=limit=0.891251:level=false:latency=true"
+      }
     }
   }
 }

@@ -63,6 +63,7 @@ await page.screenshot({ path: 'web-test-results/player-desktop.png', animations:
 await page.getByText('Hız', { exact: true }).click();
 await page.getByRole('radio', { name: '1.25 kat hız' }).click();
 await page.waitForFunction(() => window.__duruAudio.at(-1).playbackRate === 1.25);
+assert.equal(await page.evaluate(() => window.__duruAudio.at(-1).preservesPitch), true);
 await page.getByText('ŞİMDİ DİNLİYORSUN').waitFor();
 await page.clock.install();
 await page.getByRole('button', { name: 'Oynat', exact: true }).last().click();
@@ -96,7 +97,32 @@ await failurePage.unroute('**/*.wav');
 await failurePage.getByRole('button', { name: 'Yeniden dene', exact: true }).click();
 await failurePage.waitForFunction(() => window.__duruAudio.at(-1).readyState === 4);
 assert.equal(await failurePage.getByRole('button', { name: 'Yeniden dene', exact: true }).count(), 0);
-console.log('Web kabul testi geçti: katalog, boş arama, gerçek WAV oynatma, ±15 saniye, paragraf seçimi, profil değişimi, duraklatma, yeniden açılışta tam konuma devam, yer imi, hız, zamanlayıcıyla duraklatma (hızlandırılmış saat), tamamlanma, ses hatası ve yeniden deneme, mobil taşma kontrolü.');
+// Reproduce a rate selection while the restored source is still loading.
+// The displayed 1x must also be the real media rate after preparation finishes.
+const rateContext = await browser.newContext({ viewport: { width: 1440, height: 1100 } });
+await rateContext.addInitScript(() => {
+  window.__duruAudio = [];
+  const NativeAudio = window.Audio;
+  window.Audio = new Proxy(NativeAudio, { construct(target, args) { const audio = Reflect.construct(target, args); window.__duruAudio.push(audio); return audio; } });
+  localStorage.setItem('duru.listening.v1', JSON.stringify({ schema: 1, bookId: 'kiyidaki-isik', textVersion: '1.0.0', profile: 'demo-standard', paragraphId: 'p01', offset: 0, rate: 1.75, completed: false, started: true, favorite: false }));
+});
+const ratePage = await rateContext.newPage();
+ratePage.on('pageerror', error => errors.push(error.message));
+let releaseAudio;
+const audioGate = new Promise(resolve => { releaseAudio = resolve; });
+await ratePage.route('**/*.wav', async route => { await audioGate; await route.continue(); });
+await ratePage.goto('http://127.0.0.1:8083');
+await ratePage.getByRole('button', { name: 'Tam oynatıcıyı aç', exact: true }).first().click();
+await ratePage.getByText('Hız', { exact: true }).click();
+await ratePage.getByRole('radio', { name: '1 kat hız', exact: true }).click();
+releaseAudio();
+await ratePage.waitForFunction(() => window.__duruAudio.at(-1).readyState === 4 && window.__duruAudio.at(-1).playbackRate === 1);
+assert.equal(await ratePage.evaluate(() => window.__duruAudio.at(-1).preservesPitch), true);
+await ratePage.getByRole('button', { name: 'Oynat', exact: true }).last().click();
+await ratePage.waitForFunction(() => !window.__duruAudio.at(-1).paused && window.__duruAudio.at(-1).currentTime > .5 && window.__duruAudio.at(-1).playbackRate === 1);
+assert.deepEqual(errors, []);
+await rateContext.close();
+console.log('Web kabul testi geçti: katalog, boş arama, gerçek WAV oynatma, ±15 saniye, paragraf seçimi, profil değişimi, duraklatma, yeniden açılışta tam konuma devam, yer imi, hız ve ses perdesini koruma, yüklenirken seçilen 1× hızın gerçek oynatıcıya uygulanması, zamanlayıcıyla duraklatma (hızlandırılmış saat), tamamlanma, ses hatası ve yeniden deneme, mobil taşma kontrolü.');
 await browser.close();
 
 

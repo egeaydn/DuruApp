@@ -122,4 +122,32 @@ test('Altı anlatıcı için üretim, önbellek, tek paragraf yenileme ve uygula
   meta.audioHash = sha256('wrong'); fs.writeFileSync(metaPath, JSON.stringify(meta));
   assert.equal(cached(p01, identity), false);
   assert.throws(() => run('generate', '--narrtor', 'eleven-1'), /Geçersiz/);
+
+  run('generate', '--all');
+  for (let slot = 1; slot <= 6; slot++) run('preview', '--narrator', `eleven-${slot}`);
+  const afterAll = requestCount();
+  assert.match(run('generate', '--all'), /0 yeni istek/);
+  assert.equal(requestCount(), afterAll);
+  const multiWorkspace = path.join(workspace, 'multi-app');
+  for (const dir of ['content', 'assets/audio', 'src']) fs.mkdirSync(path.join(multiWorkspace, dir), { recursive: true });
+  for (const file of ['content/story.json', 'assets/audio/manifest.json', 'src/model.ts']) fs.copyFileSync(path.join(root, file), path.join(multiWorkspace, file));
+  fs.copyFileSync(path.join(workspace, 'assets/audio/elevenlabs-manifest.json'), path.join(multiWorkspace, 'assets/audio/elevenlabs-manifest.json'));
+  try {
+    globalThis.__DEV__ = true;
+    const multi = await import(pathToFileURL(path.join(multiWorkspace, 'src/model.ts')).href);
+    const voices = multi.profiles.filter(p => p.kind === 'ai');
+    assert.equal(voices.length, 6);
+    assert.equal(new Set(voices.map(p => multi.manifest.profiles[p.id].duration)).size, 6);
+    for (const from of voices) for (const to of voices) for (const paragraph of story.paragraphs) {
+      const target = multi.switchPosition(from.id, to.id, multi.positionOf(from.id, paragraph.id) + 0.1);
+      assert.equal(target, multi.positionOf(to.id, paragraph.id));
+      assert.equal(multi.paragraphAt(to.id, Math.floor(target * 1000) / 1000).id, paragraph.id);
+      const saved = { ...multi.initialSaved, profile: to.id, paragraphId: paragraph.id, offset: 0, rate: 1.25, started: true };
+      assert.deepEqual(multi.decodeSaved(JSON.stringify(saved)), saved);
+    }
+    for (const voice of voices) {
+      const review = JSON.parse(fs.readFileSync(path.join(workspace, 'generated-audio', voice.id, story.id, story.textVersion, 'review.json'), 'utf8'));
+      if (voice.id !== 'eleven-1') assert.equal(review.commercialUseVerified, false);
+    }
+  } finally { if (previousDev === undefined) delete globalThis.__DEV__; else globalThis.__DEV__ = previousDev; }
 });

@@ -9,7 +9,9 @@ globalThis.fetch = async (input, options = {}) => {
   if (url.pathname.startsWith('/v1/text-to-speech/') && options.method === 'POST') {
     const request = JSON.parse(options.body);
     fs.appendFileSync('requests.jsonl', JSON.stringify({ voiceId: url.pathname.split('/').at(-1), text: request.text }) + '\n');
-    const pcm = Buffer.alloc(24000 + request.text.length * 8);
+    const slot = Number(url.pathname.split('/').at(-1).split('-').at(-1));
+    // Different durations expose bugs that copy seconds between narrators.
+    const pcm = Buffer.alloc(24000 + request.text.length * 8 + slot * 48000);
     for (let i = 0; i < pcm.length / 2; i++) pcm.writeInt16LE(Math.round(Math.sin(i / 20) * 4000), i * 2);
     return new Response(pcm, { headers: { 'Content-Type': 'audio/pcm' } });
   }

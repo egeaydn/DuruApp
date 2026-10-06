@@ -1,0 +1,51 @@
+{
+  "voiceId": "NNn9dv8zq2kUo7d3JSGG",
+  "modelId": "eleven_multilingual_v2",
+  "textVersion": "1.0.0",
+  "identityVerified": false,
+  "commercialUseVerified": false,
+  "rightsEvidence": "",
+  "reviewedAt": "",
+  "paragraphs": {
+    "p01": {
+      "audioHash": "1eff8e5c3c5b81bc2bf7f80e969e84e3acd9cf1a79fd5b2ae7d7f761da3849fa",
+      "accepted": false,
+      "notes": "Yerel temizleme uygulandı; bu paragrafın dinleme değerlendirmesi bekleniyor."
+    },
+    "p02": {
+      "audioHash": "e65cf91663a159b6dd05be29320b88787d4f4ad3fef68d03a994577bdc6fb4bb",
+      "accepted": false,
+      "notes": "Yerel temizleme uygulandı; bu paragrafın dinleme değerlendirmesi bekleniyor."
+    },
+    "p03": {
+      "audioHash": "ae481fc928c5ddf67e99d56f4fffd5d7fc38ac1799e2e9a4ffbbc4472ca9492f",
+      "accepted": false,
+      "notes": "Yerel temizleme uygulandı; bu paragrafın dinleme değerlendirmesi bekleniyor."
+    },
+    "p04": {
+      "audioHash": "bf8ee51f0ef05ebd93eff03abc9a9849a1343cd99e287c62da3f5440f6f192d6",
+      "accepted": false,
+      "notes": "Yerel temizleme uygulandı; bu paragrafın dinleme değerlendirmesi bekleniyor."
+    },
+    "p05": {
+      "audioHash": "47fccb958057a30bb470e22fc75ed6c3e14d8d614954623414c3c6c711c83d4c",
+      "accepted": false,
+      "notes": "Yerel temizleme uygulandı; bu paragrafın dinleme değerlendirmesi bekleniyor."
+    },
+    "p06": {
+      "audioHash": "3ac12877a2968802aaa74a88c35794afef5430b5c232c4db0d4217adf8e9e5e5",
+      "accepted": false,
+      "notes": "Yerel temizleme uygulandı; bu paragrafın dinleme değerlendirmesi bekleniyor."
+    },
+    "p07": {
+      "audioHash": "453eee7ff79efcbfe1cecdb6a8e4e78f955ba1b91edb4a8faaadc48528d61b92",
+      "accepted": false,
+      "notes": "Yerel temizleme uygulandı; bu paragrafın dinleme değerlendirmesi bekleniyor."
+    },
+    "p08": {
+      "audioHash": "9e0b62b37bba4e8bc52ea5c7fe3c34d9e74e78aecf33221bf7472544a2c98d38",
+      "accepted": false,
+      "notes": "Yerel temizleme uygulandı; bu paragrafın dinleme değerlendirmesi bekleniyor."
+    }
+  }
+}
