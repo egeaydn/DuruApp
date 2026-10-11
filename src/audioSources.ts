@@ -1,7 +1,6 @@
 import type { Profile } from './model';
-import { elevenlabsSources } from './elevenlabsSources';
-export const audioSources: Record<Profile, number | string> = {
+// Keep archived recordings on disk, but only import the active narrator's audio.
+export const audioSources: Partial<Record<Profile, number | string>> = {
   'demo-standard': require('../assets/audio/demo-standard.wav'),
-  'demo-slow': require('../assets/audio/demo-slow.wav'),
-  ...elevenlabsSources,
+  'eleven-1': require('../assets/audio/eleven-1.wav'),
 };

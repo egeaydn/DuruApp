@@ -3,11 +3,11 @@ import { AppState, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setAudioModeAsync, useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 import { audioSources } from './audioSources';
-import { manifest, paragraphAt, positionOf, profiles, rates, story, switchPosition, type Profile, type Saved } from './model';
+import { manifest, paragraphAt, positionOf, profiles, rates, story, type Saved } from './model';
 
 export const STORAGE_KEY = 'duru.listening.v1';
 export function useListening(saved: Saved) {
-  const [profile, setProfile] = useState<Profile>(saved.profile);
+  const profile = saved.profile;
   const [rate, setRate] = useState(saved.rate);
   const [started, setStarted] = useState(saved.started);
   const [favorite, setFavorite] = useState(saved.favorite);
@@ -147,22 +147,6 @@ export function useListening(saved: Saved) {
     try { pending.current = clamped; await player.seekTo(clamped); setCompleted(clamped >= duration); }
     catch { setError('Bu konuma gidilemedi. Yeniden dene.'); }
   }
-  function changeProfile(next: Profile) {
-    if (next === profile || !profiles.some(p => p.id === next)) return;
-    pending.current = switchPosition(profile, next, isReady ? player.currentTime : pending.current);
-    // A second choice during loading must preserve the original playback intent.
-    desiredPlay.current = isReady ? player.playing : desiredPlay.current;
-    player.pause();
-    readyPlayer.current = null;
-    setReadyId(null);
-    setCompleted(false);
-    setProfile(next);
-    snapshot.current = { ...snapshot.current, profile: next, paragraphId: paragraphAt(next, pending.current).id, offset: 0, rate, started, favorite, completed: false };
-    persist(snapshot.current);
-    setNotice(profiles.find(p => p.id === next)?.kind === 'ai'
-      ? 'Ses değişti. Aynı paragrafın başına döndün.'
-      : 'Okuma profili değişti. Aynı paragrafın başına döndün.');
-  }
   function changeRate(next: number) {
     if (!rates.includes(next)) return;
     // A rate chosen during loading must supersede the rate captured when the
@@ -184,7 +168,7 @@ export function useListening(saved: Saved) {
   }
   return { profile, rate, started, favorite, completed, error, storageError, notice, setNotice, sleepUntil, sleepRemaining, seconds, duration, paragraph,
     playing: status.playing, loading: !isReady || status.isBuffering,
-    toggle, seek, changeProfile, changeRate, retryAudio,
+    toggle, seek, changeRate, retryAudio,
     selectParagraph: (id: string) => seek(positionOf(profile, id)),
     setSleep: (minutes: number) => setSleepUntil(minutes ? Date.now() + minutes * 60000 : null),
     toggleFavorite: () => setFavorite(value => !value),

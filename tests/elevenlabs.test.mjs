@@ -109,7 +109,10 @@ test('Altı anlatıcı için üretim, önbellek, tek paragraf yenileme ve uygula
   const model = await import(pathToFileURL(path.join(workspace, 'src/model.ts')).href);
   assert.equal(model.profiles.find(p => p.id === 'eleven-1').kind, 'ai');
   assert.equal(model.hasAiNarrators, true);
-  assert.equal(model.switchPosition('demo-standard', 'eleven-1', model.positionOf('demo-standard', 'p04') + 5), installed.profiles['eleven-1'].paragraphs[3].start);
+  const migrated = model.decodeSaved(JSON.stringify({ ...model.initialSaved, profile: 'demo-standard', paragraphId: 'p04', offset: 5 }));
+  assert.equal(migrated.profile, 'eleven-1');
+  assert.equal(migrated.offset, 0);
+  assert.equal(model.positionOf(migrated.profile, migrated.paragraphId), installed.profiles['eleven-1'].paragraphs[3].start);
   assert.equal(model.decodeSaved(JSON.stringify({ ...model.initialSaved, profile: 'eleven-1', paragraphId: 'p04', offset: 0.1 })).profile, 'eleven-1');
   run('generate', '--narrator', 'eleven-1', '--paragraph', 'p04', '--force');
   assert.equal(requestCount(), 14);
@@ -136,14 +139,16 @@ test('Altı anlatıcı için üretim, önbellek, tek paragraf yenileme ve uygula
     globalThis.__DEV__ = true;
     const multi = await import(pathToFileURL(path.join(multiWorkspace, 'src/model.ts')).href);
     const voices = multi.profiles.filter(p => p.kind === 'ai');
-    assert.equal(voices.length, 6);
-    assert.equal(new Set(voices.map(p => multi.manifest.profiles[p.id].duration)).size, 6);
-    for (const from of voices) for (const to of voices) for (const paragraph of story.paragraphs) {
-      const target = multi.switchPosition(from.id, to.id, multi.positionOf(from.id, paragraph.id) + 0.1);
-      assert.equal(target, multi.positionOf(to.id, paragraph.id));
-      assert.equal(multi.paragraphAt(to.id, Math.floor(target * 1000) / 1000).id, paragraph.id);
-      const saved = { ...multi.initialSaved, profile: to.id, paragraphId: paragraph.id, offset: 0, rate: 1.25, started: true };
-      assert.deepEqual(multi.decodeSaved(JSON.stringify(saved)), saved);
+    assert.deepEqual(voices.map(p => p.id), ['eleven-1']);
+    // The generator retains its archived voices; the app only exposes one.
+    for (let slot = 1; slot <= 6; slot++) for (const paragraph of story.paragraphs) {
+      const saved = { ...multi.initialSaved, profile: 'eleven-' + slot, paragraphId: paragraph.id, offset: 0.1, rate: 1.25, started: true };
+      const restored = multi.decodeSaved(JSON.stringify(saved));
+      assert.equal(restored.profile, 'eleven-1');
+      assert.equal(restored.paragraphId, paragraph.id);
+      assert.equal(restored.offset, slot === 1 ? 0.1 : 0);
+      const start = multi.positionOf('eleven-1', paragraph.id);
+      assert.equal(multi.paragraphAt('eleven-1', Math.floor(start * 1000) / 1000).id, paragraph.id);
     }
     for (const voice of voices) {
       const review = JSON.parse(fs.readFileSync(path.join(workspace, 'generated-audio', voice.id, story.id, story.textVersion, 'review.json'), 'utf8'));

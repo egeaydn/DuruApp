@@ -23,7 +23,6 @@ import { useFonts } from "expo-font";
 
 import {
   ArrowLeft,
-  ArrowLeftRight,
   Bookmark,
   BookOpen,
   Check,
@@ -40,7 +39,6 @@ import {
   RotateCcw,
   RotateCw,
   Search,
-  SlidersHorizontal,
   Volume2,
   X,
   type LucideIcon,
@@ -76,7 +74,7 @@ const C = {
 const sans = "Manrope_400Regular";
 const serif = "Lora_400Regular";
 type Page = "discover" | "library" | "about" | "detail";
-type Sheet = "player" | "profiles" | "speed" | "sleep" | "chapters" | null;
+type Sheet = "player" | "speed" | "sleep" | "chapters" | null;
 
 function Label({
   children,
@@ -306,55 +304,15 @@ function Transport({
     </View>
   );
 }
-function ProfileCards({ listen, onSelect }: { listen: Listening; onSelect?: () => void }) {
-  const groups = [
-    { title: "AI anlatıcılar", items: profiles.filter(p => p.kind === "ai") },
-    { title: "Sistem sesi demoları", items: profiles.filter(p => p.kind === "demo") },
-  ].filter(group => group.items.length > 0);
+function NarratorInfo() {
+  const narrator = profiles[0];
   return (
-    <View style={{ gap: 18 }}>
-      {groups.map(group => (
-        <View key={group.title} style={{ gap: 10 }}>
-          <Eyebrow>{group.title} · {group.items.length}</Eyebrow>
-          <View style={[s.row, { flexWrap: "wrap", gap: 12 }]}>
-            {group.items.map((p, index) => (
-              <Pressable
-                accessibilityRole="radio"
-                accessibilityState={{ checked: listen.profile === p.id }}
-                aria-checked={listen.profile === p.id}
-                accessibilityLabel={`${p.label}, ${p.kind === 'demo' ? 'demo sistem sesi' : p.stage === 'preview' ? 'ElevenLabs AI deneme kaydı' : 'ElevenLabs AI anlatıcı'}`}
-                onPress={() => { listen.changeProfile(p.id); onSelect?.(); }}
-                key={p.id}
-                style={({ hovered }: { pressed: boolean; hovered?: boolean }) => [
-                  s.profileCard,
-                  listen.profile === p.id && s.profileActive,
-                  hovered && { borderColor: C.green },
-                ]}
-              >
-                <View
-                  style={[
-                    s.avatar,
-                    { backgroundColor: index ? "#E9E0D3" : "#DCE5D7" },
-                  ]}
-                >
-                  <Volume2 size={21} color={C.green} strokeWidth={1.5} />
-                </View>
-                <View style={{ flex: 1, gap: 4 }}>
-                  <Label style={s.medium}>{p.label}</Label>
-                  <Label style={s.small}>{p.kind === 'ai' ? p.badge : p.description}</Label>
-                </View>
-                {listen.profile === p.id ? (
-                  <View style={s.check}>
-                    <Check size={13} color="white" />
-                  </View>
-                ) : (
-                  <View style={s.emptyCheck} />
-                )}
-              </Pressable>
-            ))}
-          </View>
-        </View>
-      ))}
+    <View style={s.narratorCard}>
+      <Volume2 size={23} color={C.green} strokeWidth={1.5} />
+      <View style={{ flex: 1, gap: 4 }}>
+        <Label style={s.medium}>{narrator.label} · {narrator.badge}</Label>
+        <Label style={[s.small, { lineHeight: 20 }]}>{profileExplanation}</Label>
+      </View>
     </View>
   );
 }
@@ -860,15 +818,12 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
                 {!query && (
                   <View style={{ marginTop: 30 }}>
                     <View style={[s.between, { marginBottom: 15 }]}>
-                      <Text style={s.sectionTitle}>Hikâyenin ritmini seç</Text>
+                      <Text style={s.sectionTitle}>Hikâyenin sesi</Text>
                       <View style={s.demoBadge}>
-                        <Label style={s.demoText}>{hasAiNarrators ? 'ANLATICILAR' : 'DEMO PROFİLLERİ'}</Label>
+                        <Label style={s.demoText}>{hasAiNarrators ? 'AI DENEME' : 'DEMO'}</Label>
                       </View>
                     </View>
-                    <ProfileCards listen={listen} />
-                    <Label style={[s.small, { marginTop: 13, lineHeight: 20 }]}>
-                      {profileExplanation}
-                    </Label>
+                    <NarratorInfo />
                   </View>
                 )}
               </>
@@ -968,11 +923,8 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
                   </View>
                 </View>
                 <View style={{ marginTop: 32, gap: 15 }}>
-                  <Text style={s.sectionTitle}>{hasAiNarrators ? 'Anlatıcılar' : 'Okuma profili'}</Text>
-                  <ProfileCards listen={listen} />
-                  <Label style={[s.small, { lineHeight: 21 }]}>
-                    {profileExplanation}
-                  </Label>
+                  <Text style={s.sectionTitle}>Anlatıcı</Text>
+                  <NarratorInfo />
                 </View>
                 <View style={{ marginTop: 29, gap: 14 }}>
                   <View style={s.between}>
@@ -1055,22 +1007,22 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
                 <View style={s.aboutCard}>
                   <Leaf size={26} color={C.green} />
                   <Text style={s.sectionTitle}>
-                    {hasAiNarrators ? 'Bir hikâye. Farklı anlatıcılar.' : 'Bir hikâye. İki demo ritmi.'}
+                    Bir hikâye. Tek ses.
                   </Text>
                   <Label style={s.aboutText}>
                     Bu prototipteki “Kıyıdaki Işık” Duru için yazılmış özgün bir
                     hikâyedir. Kapak uygulama içinde özgün olarak çizilmiştir.
-                    Sesler Microsoft Tolga Türkçe sistem sesiyle önceden
-                    kaydedilmiştir. Dengeli ve yavaş okuma, aynı sesin farklı
-                    ritimleridir; lisanslı doğal AI anlatıcı değildir.
-                    {hasAiNarrators && ` ElevenLabs sesleri ayrıca etiketlenir ve ayrı dosyalardan oynatılır. ${narratorReviewNotice}`}
+                    {hasAiNarrators
+                      ? " Hikâyenin tamamı Anlatıcı 1'in önceden hazırlanmış ElevenLabs AI deneme kaydıyla oynatılır."
+                      : " Hikâyenin tamamı Microsoft Tolga Türkçe sistem sesiyle hazırlanmış tek demo kaydıyla oynatılır."}
+                    {" "}{narratorReviewNotice}
                   </Label>
                 </View>
                 <View style={s.aboutCard}>
                   <Bookmark size={25} color={C.green} />
                   <Text style={s.sectionTitle}>Kaldığın yeri hatırlar.</Text>
                   <Label style={s.aboutText}>
-                    İlerlemen, okuma hızın, seçtiğin profil ve yer imin yalnızca
+                    İlerlemen, okuma hızın ve yer imin yalnızca
                     bu cihazda saklanır. Hesap, ödeme, mikrofon kaydı ve ses
                     klonlama yoktur. Prototipin içinde servis anahtarı bulunmaz.
                   </Label>
@@ -1078,12 +1030,11 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
                 <View style={s.aboutCard}>
                   <Headphones size={25} color={C.green} />
                   <Text style={s.sectionTitle}>
-                    Sonraki sayfa: doğal anlatıcılar.
+                    Hikâyeyi rahatça dinle.
                   </Text>
                   <Label style={s.aboutText}>
-                    ElevenLabs anlatıcıları Türkçe dinleme değerlendirmesi ve
-                    ticari kullanım hakları doğrulandıktan sonra etkinleştirilir. Demo
-                    seslerinin ticari yayın hakları henüz doğrulanmadı.
+                    Ses kalitesi dinleyerek değerlendirilir. Deneme kaydı ticari
+                    yayın için onaylanmış değildir.
                     Telefonlarda arka plan ve kilit ekranı kontrolleri
                     geliştirme derlemesinde ayrıca test edilmelidir. Uyku
                     zamanlayıcısı uygulama açıkken çalışır; işletim sistemi arka
@@ -1174,11 +1125,6 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
               active={!!listen.sleepUntil}
               onPress={() => openSheet("sleep")}
             />
-            <IconButton
-              icon={hasAiNarrators ? ArrowLeftRight : SlidersHorizontal}
-              label={hasAiNarrators ? "Ses değiştir" : "Okuma profili seç"}
-              onPress={() => openSheet("profiles")}
-            />
             <View style={s.divider} />
             <IconButton
               icon={ChevronUp}
@@ -1213,9 +1159,7 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
                 <Eyebrow>ŞİMDİ DİNLİYORSUN</Eyebrow>
               ) : (
                 <Text style={s.sectionTitle}>
-                  {sheet === "profiles"
-                    ? hasAiNarrators ? "Anlatıcını seç" : "Okuma profilini seç"
-                    : sheet === "speed"
+                  {sheet === "speed"
                       ? "Kendi hızında dinle"
                       : sheet === "sleep"
                         ? "Uyku zamanlayıcısı"
@@ -1260,15 +1204,6 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
                     </Pressable>
                     <Pressable
                       accessibilityRole="button"
-                      accessibilityLabel={hasAiNarrators ? "Ses değiştir" : "Okuma profili seç"}
-                      onPress={() => openSheet("profiles", true)}
-                      style={s.playerOption}
-                    >
-                      <ArrowLeftRight size={21} color={C.green} />
-                      <Label style={s.small}>{hasAiNarrators ? 'Ses değiştir' : 'Profil'}</Label>
-                    </Pressable>
-                    <Pressable
-                      accessibilityRole="button"
                       onPress={() => openSheet("sleep", true)}
                       style={s.playerOption}
                     >
@@ -1300,20 +1235,6 @@ function Main({ saved, readFailed }: { saved: Saved; readFailed: boolean }) {
                       </Button>
                     </View>
                   )}
-                </>
-              )}
-              {sheet === "profiles" && (
-                <>
-                  <Label style={[s.subtitle, { lineHeight: 23 }]}>
-                    {profileExplanation}
-                  </Label>
-                  <Label style={s.small}>
-                    Şu an: {profile.label} · {Number(listen.paragraph.id.slice(1))}. paragraf
-                  </Label>
-                  <ProfileCards listen={listen} onSelect={closeSheet} />
-                  <Label style={s.small}>
-                    {hasAiNarrators ? narratorReviewNotice : 'Doğal AI anlatıcılar ticari hakları doğrulandıktan sonra eklenecek.'}
-                  </Label>
                 </>
               )}
               {sheet === "speed" && (
@@ -1669,10 +1590,7 @@ const s = StyleSheet.create({
     letterSpacing: 0.8,
     color: "#6F705B",
   },
-  profileCard: {
-    flex: 1,
-    minWidth: 245,
-    minHeight: 83,
+  narratorCard: {
     padding: 16,
     flexDirection: "row",
     alignItems: "center",
@@ -1681,29 +1599,6 @@ const s = StyleSheet.create({
     borderColor: C.line,
     borderRadius: 9,
     backgroundColor: C.paper,
-  },
-  profileActive: { borderColor: "#90A280", backgroundColor: "#EDF0E6" },
-  avatar: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  check: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: C.green,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  emptyCheck: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#C8CEC1",
   },
   footer: {
     marginTop: 35,

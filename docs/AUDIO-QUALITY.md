@@ -2,7 +2,45 @@
 
 6 Ekim 2026 · Windows · Pixel 9 / Android API 36 · Expo 57.
 
-## Yapılan düzeltmeler
+## 11 Ekim 2026 — Tek sesle kalite çalışması
+
+Güncel karşılaştırma: aynı Anlatıcı 1 WAV'ı geliştirme web ekranında hash ve 1× oynatma kontrolünü geçti; kullanıcı **“Cızırtı yok”** bildirdi. Emülatörde cızırtı sürüyor. Bu, emülatör/native ses yolu ihtimalini güçlendirir; fiziksel telefon native testi ayrı bekleniyor. Komutlar ve USB bağlantısı: [WEB-PHONE-AUDIO.md](WEB-PHONE-AUDIO.md).
+
+Kapsam mevcut özgün hikâyenin ses kalitesidir. Yeni kitap, katalog API'si veya Sanity eklenmedi. Android/Expo geliştirme sürümünde tek ses **Anlatıcı 1** olur. Ses değiştirme düğmeleri, anlatıcı seçimi ekranı ve oynatıcının profil değiştirme işlemi kaldırıldı. Diğer seslerin ham kayıtları arşivde tutulur; uygulama diğer beş ElevenLabs WAV'ını ve yavaş demo WAV'ını içe aktarmaz.
+
+İnceleme bekleyen AI kaydı yayın derlemesinde otomatik etkinleştirilmez. Standart `build:web` çıktısı tek, etiketli sistem demosu kullanır; Android geliştirme istemcisi Anlatıcı 1 kullanır. Web paketindeki iki ses varlığı alternatiflerdir; aynı anda çalınmazlar. Ticari yayına hazırlık bu çalışmanın kapsamında değildir.
+
+Eski başka bir sesin ilerlemesi, aynı paragraf kimliğiyle tek sesin paragraf başına taşınır. Farklı sesin paragraf içi saniyesi kopyalanmaz. Aynı anlatıcıda paragraf içi konum korunur. Hız, tamamlanma, başlamış olma ve yer imi tercihleri korunur.
+
+### Cızırtıyı ayırma planı
+
+1. Anlatıcı 1'i 1× hızda ve tek aktif oynatıcıyla değerlendir. Aynı metin aralığının ham ve mevcut temizlenmiş örneklerini kullan; ses seviyesini sabit tut.
+2. Aynı kısa kaydı Windows, emülatör ve mümkünse fiziksel Android telefonda dinle. Windows'ta da duyulan kusur için kaynak/temizleme tarafını; yalnız emülatörde duyulan kusur için emülatör/oynatma tarafını incele. Cold Boot uygulama verilerini silmeden ayrıca denenebilir.
+3. Sorunun duyulduğu paragrafı ve saniyeyi kaydet. Bilinen aralık üzerinde küçük filtre değişikliklerini A/B karşılaştır; telaffuzun ve doğallığın bozulmadığını dinleyerek doğrula. Sayısal ölçüm veya API başarısı dinleme onayı değildir.
+4. Temizleme yeterli olmazsa yalnız problemli paragraf için yeni üretim/model ayarını değerlendir. Bu oturumda ücretli üretim yapılmadı. Değişmeyen paragrafları tekrar üretme.
+
+Yeni `npm.cmd run audio:inspect` komutu yalnızca yerel kaydı inceler; kurulu sesleri değiştirmez. Ham metadata/kimlik/hash, işlenmiş hash, birleşik WAV, paragraf başlangıçları ve sürelerini doğrular. Örnekleme, tepe/RMS, tam ölçeğe dayanan örnek sayısı ve en büyük komşu örnek farkını raporlar. Büyük örnek farkı normal konuşmadan da kaynaklanabilir; cızırtının kanıtı değildir.
+
+Karşılaştırma dosyaları 1× hızda eş başlangıç/süreye sahiptir; ses seviyeleri yeniden normalize edilmez:
+
+- `native-test-results/audio-focus/intro-raw.wav` ve `intro-clean.wav`: p01'in ilk 8 saniyesi.
+- `native-test-results/audio-focus/transition-p02-raw.wav` ve `transition-p02-clean.wav`: p02 içinde 13,305 saniyeden başlayan 8 saniye; ham kaydın en büyük komşu örnek farkının çevresi.
+- Sayısal kayıt: `native-test-results/audio-focus/report.json`. Yerel test çıktıları git'e eklenmez.
+
+### Bu değişikliğin doğrulaması
+
+- TypeScript kontrolü ve standart web paketleme başarılı.
+- 14/14 davranış testi başarılı; eski seslerden paragraf bazında taşıma, aynı anlatıcının konumunu koruma ve tek sesle yayın/geliştirme ayrımı kontrol edildi.
+- Gerçek WAV ile web kabulü başarılı: tek ses/seçim arayüzünün yokluğu, paragraf seçimi, oynat/duraklat, ±15 saniye, yeniden açılışta devam, yer imi, hız/perde koruması, yükleme sırasında 1× seçimi, zamanlayıcı, tamamlanma ve hata/yeniden deneme.
+- Anlatıcı 1'in 8 paragrafı: 24 kHz, mono, 16 bit PCM; toplam 210,187 saniye. Ham ve mevcut temizlenmiş dosyaların örnek sayıları ve biçimleri eşleşiyor. Tam ölçeğe dayanan örnek sayısı her iki kayıtta 0. Bu, kaynakta bozulma olmadığını kanıtlamaz.
+- Android emülatörde ayrıntı ve tam oynatıcı açıldı: Anlatıcı 1, 1×, 3:30 süre, Hız/Uyku/Bölümler görünür; ses değiştirme kontrolü yok. Medya kaydı duraklatılmış durumda hazır. Yeni insan dinleme değerlendirmesi veya fiziksel cihaz testi yapılmadı.
+- Kullanıcının mevcut Metro terminali korundu; yerel web test sunucusu test sonunda kapatıldı. Native bağımlılık eklenmedi; APK yeniden derlenmedi.
+
+**Sonuç sınırı:** Tek sese geçiş tamamlandı. Mevcut `duru-clean-v1` kaydı değişmedi; cızırtının tamamen çözüldüğü iddia edilmiyor. Önceki kısa örnekte cızırtının azaldığı değerlendirmesi geçerlidir; tam hikâye için yeni dinleme teyidi bekleniyor.
+
+Kaynaklar: [Expo Audio](https://docs.expo.dev/versions/v57.0.0/sdk/audio/), [FFmpeg filtreleri](https://ffmpeg.org/ffmpeg-filters.html#adeclick), [Android Cold Boot](https://developer.android.com/studio/run/emulator-snapshots).
+
+## 6 Ekim — Önceki düzeltmeler
 
 Kullanıcı, doğrudan Windows'tan çalınan Anlatıcı 1'de hızın normal ama hafif cızırtının sürdüğünü; farklı sistem demosunda cızırtı olmadığını bildirdi. Hafif temizlenmiş aynı 8 saniyede **“Cızırtı azaldı, ses doğal”** değerlendirmesini verdi. Bunun üzerine altı anlatıcının 48 paragrafına aynı yerel işlem uygulandı.
 

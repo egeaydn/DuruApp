@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 fs.mkdirSync('web-test-results', { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const audioManifest = JSON.parse(fs.readFileSync('assets/audio/manifest.json', 'utf8'));
-const slowStart = audioManifest.profiles['demo-slow'].paragraphs[2].start;
+const paragraphStart = audioManifest.profiles['demo-standard'].paragraphs[2].start;
 const context = await browser.newContext({ viewport: { width: 1440, height: 1100 } });
 await context.addInitScript(() => {
   window.__duruAudio = [];
@@ -32,9 +32,10 @@ await page.getByRole('button', { name: 'Dinlemeye başla', exact: true }).click(
 await page.waitForFunction(() => window.__duruAudio.some(a => !a.paused && a.currentTime > .8));
 await page.getByLabel('Defter, paragraf 3, Sarı sayfalar').click();
 await page.waitForFunction(() => window.__duruAudio.some(a => a.currentTime > 45 && a.currentTime < 80));
-await page.getByRole('radio', { name: 'Yavaş okuma, demo sistem sesi' }).click();
-await page.getByText('Okuma profili değişti. Aynı paragrafın başına döndün.').waitFor();
-await page.waitForFunction(start => window.__duruAudio.some(a => !a.paused && a.currentTime >= start && a.currentTime < start + 2), slowStart);
+await page.waitForFunction(start => window.__duruAudio.some(a => !a.paused && a.currentTime >= start && a.currentTime < start + 2), paragraphStart);
+assert.equal(await page.getByRole('radio').count(), 0);
+assert.equal(await page.getByRole('button', { name: 'Ses değiştir', exact: true }).count(), 0);
+assert.equal(await page.getByRole('button', { name: 'Okuma profili seç', exact: true }).count(), 0);
 await page.getByRole('button', { name: 'Duraklat', exact: true }).first().click();
 await page.waitForFunction(() => window.__duruAudio.every(a => a.paused));
 const beforeSkip = await page.evaluate(() => window.__duruAudio.at(-1).currentTime);
@@ -44,7 +45,7 @@ await page.getByRole('button', { name: '15 saniye geri', exact: true }).click();
 await page.waitForFunction(before => Math.abs(window.__duruAudio.at(-1).currentTime - before) < .1, beforeSkip);
 await page.getByLabel('Kitaplığa kaydet').click();
 await page.screenshot({ path: 'web-test-results/detail-desktop.png', fullPage: true });
-await page.waitForFunction(() => { const s = JSON.parse(localStorage.getItem('duru.listening.v1') || '{}'); return s.profile === 'demo-slow' && s.paragraphId === 'p03' && s.favorite; });
+await page.waitForFunction(() => { const s = JSON.parse(localStorage.getItem('duru.listening.v1') || '{}'); return s.profile === 'demo-standard' && s.paragraphId === 'p03' && s.favorite; });
 const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('duru.listening.v1')));
 assert.equal(saved.paragraphId, 'p03');
 assert.equal(saved.favorite, true);
@@ -52,10 +53,9 @@ await page.reload();
 await page.getByText('Dünya biraz bekleyebilir.').waitFor();
 await page.getByLabel('Kıyıdaki Işık kitap ayrıntısını aç').click();
 await page.getByText('%', { exact: true }).count();
-await page.getByRole('radio', { name: 'Yavaş okuma, demo sistem sesi' }).waitFor();
-assert.equal(await page.getByRole('radio', { name: 'Yavaş okuma, demo sistem sesi' }).getAttribute('aria-checked'), 'true');
+assert.equal(await page.getByRole('radio').count(), 0);
 await page.getByRole('button', { name: 'Kaldığım yerden dinle' }).click();
-await page.waitForFunction(position => window.__duruAudio.some(a => !a.paused && Math.abs(a.currentTime - position) < 1.5), slowStart + saved.offset);
+await page.waitForFunction(position => window.__duruAudio.some(a => !a.paused && Math.abs(a.currentTime - position) < 1.5), paragraphStart + saved.offset);
 await page.getByRole('button', { name: 'Duraklat', exact: true }).first().click();
 await page.getByRole('button', { name: 'Oynatıcıyı aç', exact: true }).click();
 await page.getByText('ŞİMDİ DİNLİYORSUN').waitFor();
@@ -122,7 +122,7 @@ await ratePage.getByRole('button', { name: 'Oynat', exact: true }).last().click(
 await ratePage.waitForFunction(() => !window.__duruAudio.at(-1).paused && window.__duruAudio.at(-1).currentTime > .5 && window.__duruAudio.at(-1).playbackRate === 1);
 assert.deepEqual(errors, []);
 await rateContext.close();
-console.log('Web kabul testi geçti: katalog, boş arama, gerçek WAV oynatma, ±15 saniye, paragraf seçimi, profil değişimi, duraklatma, yeniden açılışta tam konuma devam, yer imi, hız ve ses perdesini koruma, yüklenirken seçilen 1× hızın gerçek oynatıcıya uygulanması, zamanlayıcıyla duraklatma (hızlandırılmış saat), tamamlanma, ses hatası ve yeniden deneme, mobil taşma kontrolü.');
+console.log('Web kabul testi geçti: katalog, boş arama, gerçek WAV oynatma, ±15 saniye, paragraf seçimi, tek ses ve seçim arayüzünün yokluğu, duraklatma, yeniden açılışta tam konuma devam, yer imi, hız ve ses perdesini koruma, yüklenirken seçilen 1× hızın gerçek oynatıcıya uygulanması, zamanlayıcıyla duraklatma (hızlandırılmış saat), tamamlanma, ses hatası ve yeniden deneme, mobil taşma kontrolü.');
 await browser.close();
 
 

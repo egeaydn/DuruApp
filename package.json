@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node scripts/android.mjs --metro",
     "web": "expo start --web",
+    "web:audio": "node scripts/web-audio.mjs",
+    "test:web:audio": "node scripts/check-web-audio.mjs",
+    "android:phone": "node scripts/android-phone.mjs",
     "android": "node scripts/android.mjs",
     "android:metro": "node scripts/android.mjs --metro",
     "android:build": "node scripts/android.mjs --build",
@@ -23,7 +26,8 @@
     "tts:plan": "node scripts/elevenlabs.mjs plan",
     "tts:generate": "node scripts/elevenlabs.mjs generate",
     "tts:install": "node scripts/elevenlabs.mjs install",
-    "tts:preview": "node scripts/elevenlabs.mjs preview"
+    "tts:preview": "node scripts/elevenlabs.mjs preview",
+    "audio:inspect": "node scripts/inspect-audio.mjs"
   },
   "engines": {
     "node": ">=22.13.0 <23 || >=24.3.0"

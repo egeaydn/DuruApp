@@ -1,37 +1,52 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decodeSaved, initialSaved, manifest, paragraphAt, positionOf, switchPosition, matches } from '../src/model.ts';
-test('Profil değişimi aynı saniyeyi kopyalamaz; ortak paragrafın başına döner', () => {
-  const p = manifest.profiles['demo-standard'].paragraphs[4];
-  const target = switchPosition('demo-standard', 'demo-slow', p.start + 8);
-  assert.equal(target, manifest.profiles['demo-slow'].paragraphs[4].start);
-  assert.equal(paragraphAt('demo-slow', target).id, p.id);
-  assert.notEqual(target, p.start + 8);
+import { execFileSync } from 'node:child_process';
+globalThis.__DEV__ = true;
+const { decodeSaved, initialSaved, manifest, paragraphAt, positionOf, matches, profiles } = await import('../src/model.ts');
+
+test('Geliştirme sürümünde tek anlatıcı Anlatıcı 1 olur', () => {
+  assert.deepEqual(profiles.map(p => p.id), ['eleven-1']);
+  assert.equal(initialSaved.profile, 'eleven-1');
 });
-test('Tam paragraf sınırı sonraki paragrafı seçer', () => {
-  const next = manifest.profiles['demo-standard'].paragraphs[1];
-  assert.equal(paragraphAt('demo-standard', next.start).id, 'p02');
+test('Eski ses kaydı aynı paragrafın başına taşınır; saniye kopyalanmaz', () => {
+  for (const old of ['demo-standard', 'demo-slow', 'eleven-2', 'eleven-6']) {
+    const restored = decodeSaved(JSON.stringify({ ...initialSaved, profile: old, paragraphId: 'p04', offset: 8, rate: 1.25, started: true, favorite: true }));
+    assert.equal(restored.profile, 'eleven-1');
+    assert.equal(restored.paragraphId, 'p04');
+    assert.equal(restored.offset, 0);
+    assert.equal(restored.rate, 1.25);
+    assert.equal(restored.started, true);
+    assert.equal(restored.favorite, true);
+    assert.equal(positionOf(restored.profile, restored.paragraphId, restored.offset), manifest.profiles['eleven-1'].paragraphs[3].start);
+  }
 });
-test('Android milisaniyeye yuvarlanan paragraf konumu önceki paragrafa kaymaz', () => {
-  for (const profile of ['demo-standard', 'demo-slow']) {
-    for (const p of manifest.profiles[profile].paragraphs.slice(1)) {
-      const androidPosition = Math.floor(p.start * 1000) / 1000;
-      assert.equal(paragraphAt(profile, androidPosition).id, p.id);
-      assert.equal(paragraphAt(profile, androidPosition - 0.002).id, manifest.profiles[profile].paragraphs[Number(p.id.slice(1)) - 2].id);
-    }
+test('Tam ve Android milisaniyesine yuvarlanan paragraf sınırları doğru seçilir', () => {
+  const items = manifest.profiles['eleven-1'].paragraphs;
+  for (const [index, p] of items.entries()) {
+    assert.equal(paragraphAt('eleven-1', p.start).id, p.id);
+    assert.equal(paragraphAt('eleven-1', Math.floor(p.start * 1000) / 1000).id, p.id);
+    if (index) assert.equal(paragraphAt('eleven-1', Math.floor(p.start * 1000) / 1000 - 0.002).id, items[index - 1].id);
   }
 });
 test('Bozuk veya farklı metin sürümünden kayıtlar güvenli başlar', () => {
   for (const raw of [null, '{', JSON.stringify({ ...initialSaved, textVersion: 'old' }), JSON.stringify({ ...initialSaved, paragraphId: 'unknown' })]) assert.deepEqual(decodeSaved(raw), initialSaved);
 });
-test('İlerleme paragraf içi konum, hız, profil ve yer imiyle geri yüklenir', () => {
-  const saved = { ...initialSaved, profile: 'demo-slow', paragraphId: 'p03', offset: 7.2, rate: 1.25, started: true, favorite: true };
+test('Aynı anlatıcıda paragraf içi konum, hız ve yer imi korunur', () => {
+  const saved = { ...initialSaved, paragraphId: 'p03', offset: 7.2, rate: 1.25, started: true, favorite: true };
   assert.deepEqual(decodeSaved(JSON.stringify(saved)), saved);
-  assert.equal(positionOf(saved.profile, saved.paragraphId, saved.offset), manifest.profiles['demo-slow'].paragraphs[2].start + 7.2);
+  assert.equal(positionOf(saved.profile, saved.paragraphId, saved.offset), manifest.profiles['eleven-1'].paragraphs[2].start + 7.2);
 });
 test('Geçersiz sayılar sınırlanır ve Türkçe arama I/ı harfini doğru eşler', () => {
   assert.equal(decodeSaved(JSON.stringify({ ...initialSaved, offset: -4, rate: 100 })).offset, 0);
   assert.equal(decodeSaved(JSON.stringify({ ...initialSaved, rate: 100 })).rate, 1);
   assert.equal(matches('KIYIDAKİ IŞIK'), true);
   assert.equal(matches('bulunmayan kitap'), false);
+});
+test('Yayın paketinde inceleme bekleyen AI kaydı yerine tek açık demo kullanılır', () => {
+  const code = "globalThis.__DEV__ = false; const m = await import('./src/model.ts'); const model = m.default ?? m; console.log(JSON.stringify({ ids: model.profiles.map(p => p.id), saved: model.decodeSaved(JSON.stringify({ ...model.initialSaved, profile: 'eleven-1', paragraphId: 'p03', offset: 9 })) }));";
+  const release = JSON.parse(execFileSync(process.execPath, ['--import', 'tsx', '--input-type=module', '-e', code], { encoding: 'utf8' }));
+  assert.deepEqual(release.ids, ['demo-standard']);
+  assert.equal(release.saved.profile, 'demo-standard');
+  assert.equal(release.saved.paragraphId, 'p03');
+  assert.equal(release.saved.offset, 0);
 });

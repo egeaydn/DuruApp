@@ -1,8 +1,10 @@
 ﻿# Duru
 
-Türkçe, sakin bir sesli kitap deneyimi için React Native + Expo SDK 57 + TypeScript prototipi. Anahtarsız demo çalışır. ElevenLabs için yerel `.env` kullanan paragraf bazında üretim ve anlatıcı kurulum akışı eklendi. Altı Voice ID'nin tam hikâye kayıtları **AI deneme** olarak hazır; oynatıcıdaki **Ses değiştir** ile ortak paragraf üzerinden geçiş yapılır. Pixel 9 emülatöründe doğrulandı: [docs/VOICE-SWITCH.md](docs/VOICE-SWITCH.md). Kurulum: [docs/ELEVENLABS.md](docs/ELEVENLABS.md). Üyelik, ödeme ve mağaza yayını yoktur.
+Türkçe, sakin bir sesli kitap deneyimi için React Native + Expo SDK 57 + TypeScript prototipi. **11 Ekim itibarıyla ses kalitesi çalışması için tek anlatıcı kullanılır:** Android geliştirme sürümünde Anlatıcı 1, yayın/web paketinde inceleme bekleyen AI kaydı yerine tek etiketli sistem demosu. Ses değiştirme özelliği kaldırıldı. Mevcut özgün hikâye ve anahtarsız oynatma korunur. Cızırtıyı ayırma planı ve karşılaştırma örnekleri: [docs/AUDIO-QUALITY.md](docs/AUDIO-QUALITY.md). Yerel ElevenLabs üretim araçları ve diğer ses kayıtları arşivde korunur: [docs/ELEVENLABS.md](docs/ELEVENLABS.md). Üyelik, ödeme ve mağaza yayını yoktur.
 
 ## Çalıştırma
+
+Aynı Anlatıcı 1 kaydını web'de dinleme testi: `npm.cmd run web:audio` → http://127.0.0.1:8084. Android telefon için USB hazırlığı ve `npm.cmd run android:phone`: [docs/WEB-PHONE-AUDIO.md](docs/WEB-PHONE-AUDIO.md). Bu geliştirme web ekranı, sistem demosunu kullanan standart web yayın paketinden ayrıdır.
 
 Node 22.13+ gerekir. Bu proje, mevcut bilgisayardaki eski Node sürümüne müdahale etmeden geliştirme bağımlılığı olarak Node 22.23.3 içerir. `npm run` komutları proje içindeki sürümü kullanır. Kilit dosyasıyla temiz kurulum:
 
@@ -37,10 +39,10 @@ Adres: http://127.0.0.1:8083. Sunucu WAV için HTTP Range isteklerini destekler.
 - Tek özgün hikâye: **Kıyıdaki Işık**, 4 bölüm, 8 paragraf; uygulama içinde çizilmiş özgün SVG kapak.
 - Katalog, Türkçe harf duyarlı arama, boş sonuç, kitap ayrıntısı, kitaplık ve yer imi.
 - Gerçek paketlenmiş WAV dosyalarıyla oynat/duraklat, ±15 saniye, dokunarak konum seçimi, paragraf seçimi, 0.75–2× hız, uyku zamanlayıcısı, tamamlanma ve yeniden dinleme.
-- Dengeli ve yavaş okuma **aynı Microsoft Tolga Türkçe sistem sesinin iki demo ritmidir**. Doğal AI anlatıcı veya farklı kişi gibi sunulmaz. Kullanıcıdan mikrofon erişimi istenmez.
+- Geliştirme sürümünde tek ElevenLabs AI deneme kaydı; yayın/web sürümünde tek Microsoft Tolga sistem demosu. Sistem demosu doğal AI anlatıcı gibi sunulmaz. Mikrofon erişimi istenmez.
 - İlerleme, profil, hız ve yer imi AsyncStorage ile cihazda saklanır. Yeniden açılışta konum geri yüklenir; kullanıcı oynatmaya basana kadar ses başlamaz.
 - Yükleme göstergesi, ses hatası, yeniden deneme ve depolama hatası mesajları.
-- Mobil ve geniş ekran düzeni, Türkçe kontrol etiketleri, profil/hız için seçili durum semantiği, büyüyebilen yazılar ve SVG kapak.
+- Mobil ve geniş ekran düzeni, Türkçe kontrol etiketleri, hız için seçili durum semantiği, büyüyebilen yazılar ve SVG kapak.
 
 ## Ses ve paragraf eşlemesi
 
@@ -50,7 +52,7 @@ Adres: http://127.0.0.1:8083. Sunucu WAV için HTTP Range isteklerini destekler.
 
 `npm run audio:verify`, 16 bit PCM başlıklarını, verinin bütünlüğünü ve sessiz olmadığını kontrol eder; ardından her profilin paragraf dosyalarını birleştirerek kesintisiz WAV oynatma dosyasını ve manifesti oluşturur. Bu sayede paragraf geçişlerinde JavaScript'in arka planda çalışmasına ihtiyaç duyulmaz. Dosya doğrulaması telaffuz veya doğal anlatım kalitesini kanıtlamaz.
 
-Profil değişiminde oynatıcının gerçek konumundan mevcut paragraf kimliği bulunur; hedef profilin aynı paragrafının **başına** gidilir. Aynı saniye kopyalanmaz. Bu davranış arayüzde açıklanır. İlerleme kaydı `bookId + textVersion + profile + paragraphId + offset` içerir. Farklı metin sürümünden veya bozuk kayıtlar güvenli başlangıca döner. Konum yaklaşık her saniye ve duraklatma/durum değişiminde yazılır; ani süreç sonlandırmada son yaklaşık bir saniye kaybolabilir.
+Ses değiştirme arayüzü yoktur. Önceki başka bir anlatıcıyla kaydedilmiş ilerleme, tek sesin aynı paragrafının başına taşınır; başka sesin saniyesi kopyalanmaz. Aynı anlatıcının kaydı paragraf içi konumuyla korunur. İlerleme kaydı `bookId + textVersion + profile + paragraphId + offset` içerir. Farklı metin sürümünden veya bozuk kayıtlar güvenli başlangıca döner. Konum yaklaşık her saniye ve duraklatma/durum değişiminde yazılır; ani süreç sonlandırmada son yaklaşık bir saniye kaybolabilir.
 
 Demo kayıtlarını yeniden üretmek için Windows'ta Microsoft Tolga sistem sesi kurulu olmalıdır. Uygulamayı kullanmak için ses üretmek veya bu sesi telefona kurmak **gerekmez**; WAV dosyaları zaten projededir.
 
@@ -76,6 +78,7 @@ npm.cmd run audio:verify
 npm.cmd run typecheck
 npm.cmd test
 npm.cmd run audio:verify
+npm.cmd run audio:inspect
 npm.cmd run config:verify
 npm.cmd run build:web
 ```

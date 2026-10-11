@@ -20,6 +20,14 @@ npm.cmd run android:build
 
 Bu komut Expo prebuild ile üretilen Android klasörünü günceller, APK'yı derler ve kurar. Günlük TypeScript değişikliklerinde bu adım gerekmez. Başka terminalde Metro açıkken native build komutunun başarıyla bitip çıkması normaldir; açık kalan terminal günlük `android` / `start` terminalidir.
 
+## 8 Ekim 2026 — “Unable to load script”
+
+Metro `127.0.0.1:8081` üzerinde çalışmasına rağmen emülatörde `adb reverse --list` boştu. Duru'nun localhost geliştirme bağlantısı, emülatörün kendi localhost adresine gidiyordu. `emulator-5554` için `adb reverse tcp:8081 tcp:8081` yeniden kuruldu ve Duru mevcut Metro'ya yönlenen geliştirme bağlantısıyla tekrar açıldı. Mevcut Expo terminali kapatılmadı; uygulama verileri silinmedi ve APK yeniden derlenmedi.
+
+Doğrulama: Metro `/status` yanıtı `packager-status:running`; ADB yönlendirmesi `tcp:8081 tcp:8081`; ön plandaki activity `.MainActivity`; Android UI ağacında Duru, “Kıyıdaki Işık”, “Anlatıcı 1” ve “Oynat” görünür. Bu kontrol açılış/bağlantı kontrolüdür; yeni ses kalitesi veya fiziksel cihaz testi yapılmadı.
+
+Emülatör veya ADB yeniden başlatılınca port yönlendirmesi kaybolabilir. Metro terminali zaten açıksa o terminalde `a` tuşuyla Android bağlantısını yeniden aç. Metro kapalıysa emülatörü başlattıktan sonra `npm.cmd run android` çalıştır ve terminali açık tut. Yalnız `r` ile yenilemek, eksik port yönlendirmesini yeniden kurmak için yeterli olmayabilir.
+
 ## Düzeltilen nedenler
 
 - Önceki `android` komutu native derleme yapıp mevcut Metro'ya bağlanıyordu. Derleme tamamlanınca komut kapanıyor, kullanıcıya ayrı Metro terminali ve QR göstermiyordu. Günlük geliştirme ile native derleme ayrıldı; günlük CLI aynı süreçte terminali yönetir.
